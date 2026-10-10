@@ -1,0 +1,5417 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0866cc">
+<title>مكتبتي | اقرأ لتتغير حياتك</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<style>
+:root {
+    --blue: #0866cc;
+    --dark-blue: #0d3b66;
+    --light-blue: #eaf4ff;
+    --bg: #f7fbff;
+    --card: #ffffff;
+    --text: #153d70;
+    --muted: #7187a5;
+    --border: #e8eff8;
+    --shadow: 0 3px 12px rgba(23, 67, 115, .08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-bottom: 85px;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #54a6ff;
+    outline-offset: 2px;
+}
+
+/* رأس الصفحة */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: linear-gradient(110deg, #0755b6, #087ce9);
+    color: white;
+    padding: 12px 14px;
+    box-shadow: 0 3px 12px #063f831c;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+}
+
+.icon-btn {
+    width: 37px;
+    height: 40px;
+    flex-shrink: 0;
+    border: 0;
+    color: white;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+}
+
+.icon-btn:active {
+    background: #ffffff25;
+}
+
+.material-icons-round {
+    font-size: 25px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 70px;
+    height: 43px;
+    background: #ffffff24;
+    border-radius: 25px;
+    padding: 0 10px;
+}
+
+.search-box input {
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: white;
+    font-size: 12px;
+}
+
+.search-box input::placeholder {
+    color: #ffffffbd;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.logo .material-icons-round {
+    font-size: 35px;
+}
+
+.logo-text {
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.logo small {
+    display: block;
+    font-size: 9px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* القائمة الجانبية */
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: #0007;
+}
+
+.overlay.show {
+    display: block;
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 41;
+    width: min(290px, 85vw);
+    padding: 24px 18px;
+    background: var(--card);
+    transform: translateX(110%);
+    transition: transform .25s;
+    box-shadow: -5px 0 20px #0001;
+}
+
+.drawer.open {
+    transform: translateX(0);
+}
+
+.drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--blue);
+    font-size: 22px;
+    font-weight: 800;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.drawer button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    color: var(--text);
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    text-align: right;
+}
+
+.drawer button:hover {
+    background: var(--light-blue);
+}
+
+/* الإعلان */
+
+.ad-banner {
+    position: relative;
+    min-height: 150px;
+    margin: 14px 12px 16px;
+    border-radius: 15px;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, #062b4c88, #064a88a8),
+      url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1100&q=80')
+      center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.ad-content {
+    padding: 22px 12px;
+}
+
+.ad-content h1 {
+    font-size: clamp(21px, 5vw, 29px);
+    font-weight: 800;
+}
+
+.ad-content p {
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+.ad-label {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    background: #0874e8;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 7px;
+    font-size: 11px;
+}
+
+.ad-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.ad-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffffff80;
+}
+
+.ad-dots span:first-child {
+    background: white;
+}
+
+/* التصنيفات */
+
+.categories {
+    display: flex;
+    gap: 9px;
+    overflow-x: auto;
+    padding: 0 12px 9px;
+    scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar,
+.books-row::-webkit-scrollbar {
+    display: none;
+}
+
+.category {
+    flex: 0 0 82px;
+    min-height: 93px;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: #edf5ff;
+    color: var(--dark-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 3px;
+}
+
+.category .material-icons-round {
+    font-size: 28px;
+    color: #0758b8;
+}
+
+.category.active {
+    border-color: #8dbfff;
+    background: #d8eaff;
+}
+
+/* عناوين الأقسام */
+
+.section {
+    margin-top: 20px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark-blue);
+}
+
+.section-title .material-icons-round {
+    color: var(--blue);
+    font-size: 27px;
+}
+
+.see-all {
+    border: 0;
+    background: transparent;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* بطاقات الكتب */
+
+.books-row {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 3px 12px 10px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+}
+
+.book-card {
+    flex: 0 0 155px;
+    min-width: 0;
+    padding: 8px;
+    border-radius: 13px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    text-align: center;
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.book-card:active {
+    transform: scale(.97);
+}
+
+.book-cover {
+    width: 100%;
+    height: 164px;
+    object-fit: cover;
+    border-radius: 7px;
+    background: var(--light-blue);
+    display: block;
+}
+
+.book-title {
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.7;
+    margin-top: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-author {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.book-category {
+    display: inline-block;
+    margin-top: 6px;
+    background: var(--light-blue);
+    color: var(--blue);
+    border-radius: 20px;
+    padding: 2px 9px;
+    font-size: 10px;
+}
+
+.book-rating {
+    margin-top: 6px;
+    color: var(--text);
+    font-size: 12px;
+    direction: ltr;
+}
+
+.star {
+    color: #ffad21;
+}
+
+/* مزايا الموقع */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 12px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: var(--light-blue);
+    border-radius: 13px;
+}
+
+.feature .material-icons-round {
+    font-size: 27px;
+    color: var(--blue);
+}
+
+.feature strong {
+    display: block;
+    font-size: 12px;
+}
+
+.feature small {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* الشريط السفلي */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 25;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 73px;
+    padding: 6px 2px calc(6px + env(safe-area-inset-bottom));
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -3px 15px #173e6610;
+}
+
+.nav-item {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 0;
+}
+
+.nav-item .material-icons-round {
+    font-size: 24px;
+}
+
+.nav-item.active {
+    color: var(--blue);
+}
+
+/* نافذة تفاصيل الكتاب */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: #0008;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 420px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 18px;
+    background: var(--card);
+    color: var(--text);
+    text-align: center;
+}
+
+.modal-cover {
+    width: 135px;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 12px auto;
+}
+
+.modal-card h2 {
+    font-size: 20px;
+}
+
+.modal-card p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+    margin: 8px 0;
+}
+
+.action-btn {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    margin-top: 9px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--blue);
+    color: white;
+    font-weight: 700;
+}
+
+.action-btn.secondary {
+    background: var(--light-blue);
+    color: var(--blue);
+}
+
+.close-btn {
+    float: left;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+}
+
+/* الوضع الليلي */
+
+body.dark {
+    --bg: #0c1522;
+    --card: #142236;
+    --text: #e3edfc;
+    --dark-blue: #d6e8ff;
+    --light-blue: #1d3450;
+    --muted: #a2b4cd;
+    --border: #263951;
+    --shadow: 0 3px 12px #0002;
+}
+
+body.dark .category {
+    background: #1d3450;
+    color: #d6e8ff;
+}
+
+body.dark .category.active {
+    background: #24476e;
+}
+
+@media (min-width: 700px) {
+    .header {
+        padding: 14px 5%;
+    }
+
+    .ad-banner {
+        margin: 20px auto;
+        max-width: 1100px;
+        min-height: 230px;
+    }
+
+    .categories {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .category {
+        flex-basis: 105px;
+    }
+
+    .section {
+        max-width: 1200px;
+        margin: 25px auto 0;
+    }
+
+    .book-card {
+        flex-basis: 185px;
+    }
+
+    .book-cover {
+        height: 220px;
+    }
+
+    .features {
+        max-width: 1000px;
+        margin: 25px auto;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .bottom-nav {
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .nav-item {
+        flex: 0 1 110px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-row">
+
+        <button class="icon-btn" id="menuButton"
+                aria-label="فتح القائمة">
+            <span class="material-icons-round">menu</span>
+        </button>
+
+        <label class="search-box">
+            <span class="material-icons-round">search</span>
+            <input id="searchInput" type="search"
+                   placeholder="ابحث عن كتاب..."
+                   aria-label="البحث عن كتاب">
+        </label>
+
+        <div class="logo">
+            <span class="material-icons-round">auto_stories</span>
+            <div class="logo-text">
+                مكتبتي
+                <small>اقرأ لتتغير حياتك</small>
+            </div>
+        </div>
+
+        <button class="icon-btn" id="themeButton"
+                aria-label="تغيير المظهر">
+            <span class="material-icons-round">dark_mode</span>
+        </button>
+
+        <button class="icon-btn" id="shareButton"
+                aria-label="مشاركة الموقع">
+            <span class="material-icons-round">share</span>
+        </button>
+
+    </div>
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="drawer" id="drawer">
+    <div class="drawer-head">
+        <span>📚 مكتبتي</span>
+        <button class="icon-btn" id="closeDrawer"
+                style="color:var(--text)">
+            <span class="material-icons-round">close</span>
+        </button>
+    </div>
+
+    <button data-page="home">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button data-page="categories">
+        <span class="material-icons-round">grid_view</span>
+        الأقسام
+    </button>
+
+    <button data-page="library">
+        <span class="material-icons-round">auto_stories</span>
+        مكتبتي
+    </button>
+
+    <button data-page="notifications">
+        <span class="material-icons-round">notifications</span>
+        الإشعارات
+    </button>
+
+    <button data-page="profile">
+        <span class="material-icons-round">person</span>
+        الملف الشخصي
+    </button>
+</aside>
+
+<!-- مساحة الإعلان -->
+<section class="ad-banner" aria-label="مساحة إعلانية تجريبية">
+    <span class="ad-label">إعلان</span>
+
+    <div class="ad-content">
+        <h1>اقرأ لتتغير حياتك</h1>
+        <p>كل كتاب بداية جديدة</p>
+
+        <div class="ad-dots">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</section>
+
+<!-- التصنيفات -->
+<section class="categories" id="categories">
+
+    <button class="category active" data-category="الكل">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button class="category" data-category="دينية">
+        <span class="material-icons-round">mosque</span>
+        دينية
+    </button>
+
+    <button class="category" data-category="ثقافية">
+        <span class="material-icons-round">account_balance</span>
+        ثقافية
+    </button>
+
+    <button class="category" data-category="روايات وقصص">
+        <span class="material-icons-round">menu_book</span>
+        روايات وقصص
+    </button>
+
+    <button class="category" data-category="تعليمية">
+        <span class="material-icons-round">school</span>
+        تعليمية
+    </button>
+
+    <button class="category" data-category="تطوير الذات">
+        <span class="material-icons-round">trending_up</span>
+        تطوير الذات
+    </button>
+
+    <button class="category" data-category="علمية">
+        <span class="material-icons-round">science</span>
+        علمية
+    </button>
+
+    <button class="category" data-category="قانونية">
+        <span class="material-icons-round">balance</span>
+        قانونية
+    </button>
+
+    <button class="category" data-category="تقنية">
+        <span class="material-icons-round">memory</span>
+        تقنية
+    </button>
+
+</section>
+
+<main id="bookSections"></main>
+
+<!-- مزايا الموقع -->
+<section class="features">
+
+    <div class="feature">
+        <span class="material-icons-round">auto_stories</span>
+        <div>
+            <strong>مكتبة متنوعة</strong>
+            <small>كتب في مختلف المجالات</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">verified_user</span>
+        <div>
+            <strong>تجربة قراءة مريحة</strong>
+            <small>واجهة سهلة الاستخدام</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">devices</span>
+        <div>
+            <strong>متوافق مع الأجهزة</strong>
+            <small>هاتف وحاسوب ولوحي</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">favorite</span>
+        <div>
+            <strong>اكتشف عالمًا جديدًا</strong>
+            <small>مع مكتبتي</small>
+        </div>
+    </div>
+
+</section>
+
+<!-- القائمة السفلية -->
+<nav class="bottom-nav">
+
+    <button class="nav-item active" data-page="home">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button class="nav-item" data-page="categories">
+        <span class="material-icons-round">grid_view</span>
+        الأقسام
+    </button>
+
+    <button class="nav-item" data-page="library">
+        <span class="material-icons-round">auto_stories</span>
+        مكتبتي
+    </button>
+
+    <button class="nav-item" data-page="notifications">
+        <span class="material-icons-round">notifications_none</span>
+        الإشعارات
+    </button>
+
+    <button class="nav-item" data-page="profile">
+        <span class="material-icons-round">person_outline</span>
+        الملف الشخصي
+    </button>
+
+</nav>
+
+<!-- تفاصيل الكتاب -->
+<div class="modal" id="bookModal">
+    <div class="modal-card">
+        <button class="close-btn" id="closeModal"
+                aria-label="إغلاق">
+            <span class="material-icons-round">close</span>
+        </button>
+
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<script>
+/*
+  بيانات تجريبية للعرض فقط.
+  يمكن لاحقًا استبدالها بقاعدة بيانات حقيقية.
+*/
+
+const books = [
+    {
+        title: "العادات الذرية",
+        author: "جيمس كلير",
+        category: "تطوير الذات",
+        rating: "4.4",
+        cover: "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg",
+        description: "كتاب عن بناء العادات الصغيرة وتحسين السلوك تدريجيًا."
+    },
+    {
+        title: "الأب الغني والأب الفقير",
+        author: "روبرت كيوساكي",
+        category: "تطوير الذات",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg",
+        description: "كتاب يناقش طريقة التفكير في المال والاستثمار."
+    },
+    {
+        title: "أربعون حديثًا",
+        author: "الإمام النووي",
+        category: "دينية",
+        rating: "4.7",
+        cover: "https://covers.openlibrary.org/b/isbn/9789960892711-L.jpg",
+        description: "مجموعة من الأحاديث النبوية التي تجمع أبوابًا مهمة من الدين."
+    },
+    {
+        title: "القرآن الكريم",
+        author: "كتاب الله",
+        category: "دينية",
+        rating: "4.9",
+        cover: "https://covers.openlibrary.org/b/isbn/9781590080252-L.jpg",
+        description: "القرآن الكريم، كتاب الهداية للمسلمين."
+    },
+    {
+        title: "صحيح البخاري",
+        author: "الإمام البخاري",
+        category: "دينية",
+        rating: "4.8",
+        cover: "https://covers.openlibrary.org/b/isbn/9789960892827-L.jpg",
+        description: "من أشهر كتب الحديث النبوي."
+    },
+    {
+        title: "مئة عام من العزلة",
+        author: "غابرييل غارسيا ماركيز",
+        category: "روايات وقصص",
+        rating: "4.5",
+        cover: "https://covers.openlibrary.org/b/isbn/9780060883287-L.jpg",
+        description: "رواية أدبية تدور حول أجيال من عائلة بوينديا."
+    },
+    {
+        title: "فن التفكير",
+        author: "كتاب في التفكير",
+        category: "ثقافية",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9780062219695-L.jpg",
+        description: "موضوعات عن التفكير والتحليل واتخاذ القرارات."
+    },
+    {
+        title: "تاريخ الحضارات",
+        author: "مؤلفون متنوعون",
+        category: "ثقافية",
+        rating: "4.2",
+        cover: "https://covers.openlibrary.org/b/isbn/9780140444312-L.jpg",
+        description: "نظرة عامة إلى تاريخ الحضارات الإنسانية."
+    },
+    {
+        title: "مقدمة في العلوم",
+        author: "مؤلفون متنوعون",
+        category: "علمية",
+        rating: "4.4",
+        cover: "https://covers.openlibrary.org/b/isbn/9780199216805-L.jpg",
+        description: "مدخل مبسط إلى عدد من المفاهيم العلمية."
+    },
+    {
+        title: "أساسيات التقنية",
+        author: "مؤلفون متنوعون",
+        category: "تقنية",
+        rating: "4.1",
+        cover: "https://covers.openlibrary.org/b/isbn/9780131103627-L.jpg",
+        description: "موضوعات تمهيدية في عالم التقنية والحوسبة."
+    },
+    {
+        title: "مبادئ القانون",
+        author: "مؤلفون متنوعون",
+        category: "قانونية",
+        rating: "4.2",
+        cover: "https://covers.openlibrary.org/b/isbn/9780198863155-L.jpg",
+        description: "مقدمة عامة إلى مفاهيم قانونية أساسية."
+    },
+    {
+        title: "تعلم اللغة",
+        author: "مؤلفون متنوعون",
+        category: "تعليمية",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9780194202411-L.jpg",
+        description: "موضوعات تعليمية تساعد على اكتساب المعرفة."
+    }
+];
+
+const sections = [
+    { title: "كتب شائعة", category: "الكل", icon: "local_fire_department" },
+    { title: "كتب دينية", category: "دينية", icon: "mosque" },
+    { title: "كتب ثقافية", category: "ثقافية", icon: "account_balance" },
+    { title: "روايات وقصص", category: "روايات وقصص", icon: "auto_stories" },
+    { title: "كتب تعليمية", category: "تعليمية", icon: "school" },
+    { title: "تطوير الذات", category: "تطوير الذات", icon: "trending_up" },
+    { title: "كتب علمية", category: "علمية", icon: "science" },
+    { title: "كتب قانونية", category: "قانونية", icon: "balance" },
+    { title: "كتب تقنية", category: "تقنية", icon: "memory" }
+];
+
+const sectionsContainer = document.getElementById("bookSections");
+const searchInput = document.getElementById("searchInput");
+const bookModal = document.getElementById("bookModal");
+const modalContent = document.getElementById("modalContent");
+
+let activeCategory = "الكل";
+let searchTerm = "";
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+function renderBooks() {
+    sectionsContainer.innerHTML = "";
+
+    const filteredBooks = books.filter(book => {
+        const matchesCategory =
+            activeCategory === "الكل" ||
+            book.category === activeCategory;
+
+        const query = searchTerm.trim().toLowerCase();
+
+        const matchesSearch =
+            !query ||
+            book.title.toLowerCase().includes(query) ||
+            book.author.toLowerCase().includes(query) ||
+            book.category.toLowerCase().includes(query);
+
+        return matchesCategory && matchesSearch;
+    });
+
+    sections.forEach(section => {
+        const sectionBooks = filteredBooks.filter(book =>
+            section.category === "الكل"
+                ? true
+                : book.category === section.category
+        );
+
+        if (!sectionBooks.length) return;
+
+        const sectionElement = document.createElement("section");
+        sectionElement.className = "section";
+
+        sectionElement.innerHTML = `
+            <div class="section-heading">
+                <h2 class="section-title">
+                    <span class="material-icons-round">
+                        ${escapeHTML(section.icon)}
+                    </span>
+                    ${escapeHTML(section.title)}
+                </h2>
+
+                <button class="see-all"
+                        data-show-category="${escapeHTML(section.category)}">
+                    ‹ عرض الكل
+                </button>
+            </div>
+
+            <div class="books-row">
+                ${sectionBooks.map(book => `
+                    <article class="book-card"
+                             tabindex="0"
+                             role="button"
+                             data-book="${escapeHTML(book.title)}"
+                             aria-label="عرض ${escapeHTML(book.title)}">
+
+                        <img class="book-cover"
+                             src="${escapeHTML(book.cover)}"
+                             alt="غلاف ${escapeHTML(book.title)}"
+                             loading="lazy"
+                             onerror="this.onerror=null;this.src='https://placehold.co/300x420/eaf4ff/0d3b66?text=Book';">
+
+                        <h3 class="book-title">
+                            ${escapeHTML(book.title)}
+                        </h3>
+
+                        <p class="book-author">
+                            ${escapeHTML(book.author)}
+                        </p>
+
+                        <span class="book-category">
+                            ${escapeHTML(book.category)}
+                        </span>
+
+                        <div class="book-rating">
+                            <span class="star">★</span>
+                            ${escapeHTML(book.rating)}
+                        </div>
+                    </article>
+                `).join("")}
+            </div>
+        `;
+
+        sectionsContainer.appendChild(sectionElement);
+    });
+
+    if (!sectionsContainer.children.length) {
+        sectionsContainer.innerHTML = `
+            <p style="text-align:center;padding:40px 15px">
+                لم نعثر على كتب تطابق بحثك.
+            </p>
+        `;
+    }
+}
+
+function openBook(title) {
+    const book = books.find(item => item.title === title);
+    if (!book) return;
+
+    modalContent.innerHTML = `
+        <h2>${escapeHTML(book.title)}</h2>
+
+        <img class="modal-cover"
+             src="${escapeHTML(book.cover)}"
+             alt="غلاف الكتاب"
+             onerror="this.onerror=null;this.src='https://placehold.co/300x420/eaf4ff/0d3b66?text=Book';">
+
+        <p><strong>المؤلف:</strong>
+           ${escapeHTML(book.author)}</p>
+
+        <p><strong>القسم:</strong>
+           ${escapeHTML(book.category)}</p>
+
+        <p>${escapeHTML(book.description)}</p>
+
+        <button class="action-btn" id="readButton">
+            قراءة الكتاب
+        </button>
+
+        <button class="action-btn secondary" id="downloadButton">
+            تحميل PDF
+        </button>
+
+        <button class="action-btn secondary" id="favoriteButton">
+            ♡ إضافة إلى مكتبتي
+        </button>
+
+        <p id="bookMessage" aria-live="polite"></p>
+    `;
+
+    bookModal.classList.add("show");
+
+    document.getElementById("readButton").onclick = () => {
+        document.getElementById("bookMessage").textContent =
+            "ستتوفر القراءة بعد ربط ملف الكتاب الحقيقي.";
+    };
+
+    document.getElementById("downloadButton").onclick = () => {
+        document.getElementById("bookMessage").textContent =
+            "ستتوفر خاصية التحميل بعد إضافة رابط PDF حقيقي.";
+    };
+
+    document.getElementById("favoriteButton").onclick = () => {
+        let favorites = JSON.parse(
+            localStorage.getItem("maktabatiFavorites") || "[]"
+        );
+
+        if (favorites.includes(book.title)) {
+            document.getElementById("bookMessage").textContent =
+                "الكتاب موجود بالفعل في مكتبتي.";
+            return;
+        }
+
+        favorites.push(book.title);
+
+        localStorage.setItem(
+            "maktabatiFavorites",
+            JSON.stringify(favorites)
+        );
+
+        document.getElementById("bookMessage").textContent =
+            "أُضيف الكتاب إلى مكتبتك على هذا الجهاز.";
+    };
+}
+
+/* فتح الكتب */
+
+sectionsContainer.addEventListener("click", event => {
+    const card = event.target.closest("[data-book]");
+    const showCategory = event.target.closest("[data-show-category]");
+
+    if (card) {
+        openBook(card.dataset.book);
+    }
+
+    if (showCategory) {
+        selectCategory(showCategory.dataset.showCategory);
+        document.getElementById("categories").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+});
+
+sectionsContainer.addEventListener("keydown", event => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    const card = event.target.closest("[data-book]");
+    if (card) {
+        event.preventDefault();
+        openBook(card.dataset.book);
+    }
+});
+
+/* البحث */
+
+searchInput.addEventListener("input", () => {
+    searchTerm = searchInput.value;
+    renderBooks();
+});
+
+/* اختيار التصنيف */
+
+function selectCategory(category) {
+    activeCategory = category;
+
+    document.querySelectorAll(".category").forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.category === category
+        );
+    });
+
+    renderBooks();
+}
+
+document.querySelectorAll(".category").forEach(button => {
+    button.addEventListener("click", () => {
+        selectCategory(button.dataset.category);
+    });
+});
+
+/* الوضع الليلي */
+
+document.getElementById("themeButton").addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    const dark = document.body.classList.contains("dark");
+
+    document.getElementById("themeButton").innerHTML =
+        `<span class="material-icons-round">${
+            dark ? "light_mode" : "dark_mode"
+        }</span>`;
+
+    localStorage.setItem("maktabatiDark", dark ? "1" : "0");
+});
+
+if (localStorage.getItem("maktabatiDark") === "1") {
+    document.body.classList.add("dark");
+
+    document.getElementById("themeButton").innerHTML =
+        '<span class="material-icons-round">light_mode</span>';
+}
+
+/* القائمة الجانبية */
+
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
+
+function closeDrawer() {
+    drawer.classList.remove("open");
+    overlay.classList.remove("show");
+}
+
+document.getElementById("menuButton").onclick = () => {
+    drawer.classList.add("open");
+    overlay.classList.add("show");
+};
+
+document.getElementById("closeDrawer").onclick = closeDrawer;
+overlay.onclick = closeDrawer;
+
+/* إغلاق نافذة الكتاب */
+
+document.getElementById("closeModal").onclick = () => {
+    bookModal.classList.remove("show");
+};
+
+bookModal.addEventListener("click", event => {
+    if (event.target === bookModal) {
+        bookModal.classList.remove("show");
+    }
+});
+
+/* المشاركة */
+
+document.getElementById("shareButton").onclick = async () => {
+    const shareData = {
+        title: "مكتبتي",
+        text: "اكتشف عالم الكتب مع مكتبتي",
+        url: location.href
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(location.href);
+            alert("تم نسخ رابط الصفحة.");
+        } else {
+            alert("بعد نشر الموقع، يمكنك مشاركة رابطه مع الآخرين.");
+        }
+    } catch (error) {
+        if (error.name !== "AbortError") {
+            alert("تعذرت المشاركة من هذا المتصفح.");
+        }
+    }
+};
+
+/* أزرار التنقل */
+
+function navigate(page) {
+    closeDrawer();
+
+    document.querySelectorAll(".nav-item").forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.page === page
+        );
+    });
+
+    if (page === "home") {
+        activeCategory = "الكل";
+        searchInput.value = "";
+        searchTerm = "";
+        selectCategory("الكل");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+    }
+
+    if (page === "categories") {
+        document.getElementById("categories").scrollIntoView({
+            behavior: "smooth"
+        });
+        return;
+    }
+
+    if (page === "library") {
+        const favorites = JSON.parse(
+            localStorage.getItem("maktabatiFavorites") || "[]"
+        );
+
+        alert(
+            favorites.length
+                ? "كتبك المحفوظة:\n" + favorites.join("\n")
+                : "لم تضف أي كتاب إلى مكتبتك بعد."
+        );
+        return;
+    }
+
+    if (page === "notifications") {
+        alert("لا توجد إشعارات جديدة.");
+        return;
+    }
+
+    if (page === "profile") {
+        alert("سيُضاف الملف الشخصي عند تطوير الموقع.");
+    }
+}
+
+document.querySelectorAll("[data-page]").forEach(button => {
+    button.addEventListener("click", () => {
+        navigate(button.dataset.page);
+    });
+});
+
+/* عرض الصفحة الرئيسية */
+
+renderBooks();
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0866cc">
+<title>مكتبتي | اقرأ لتتغير حياتك</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<style>
+:root {
+    --blue: #0866cc;
+    --dark-blue: #0d3b66;
+    --light-blue: #eaf4ff;
+    --bg: #f7fbff;
+    --card: #ffffff;
+    --text: #153d70;
+    --muted: #7187a5;
+    --border: #e8eff8;
+    --shadow: 0 3px 12px rgba(23, 67, 115, .08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-bottom: 85px;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #54a6ff;
+    outline-offset: 2px;
+}
+
+/* رأس الصفحة */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: linear-gradient(110deg, #0755b6, #087ce9);
+    color: white;
+    padding: 12px 14px;
+    box-shadow: 0 3px 12px #063f831c;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+}
+
+.icon-btn {
+    width: 37px;
+    height: 40px;
+    flex-shrink: 0;
+    border: 0;
+    color: white;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+}
+
+.icon-btn:active {
+    background: #ffffff25;
+}
+
+.material-icons-round {
+    font-size: 25px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 70px;
+    height: 43px;
+    background: #ffffff24;
+    border-radius: 25px;
+    padding: 0 10px;
+}
+
+.search-box input {
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: white;
+    font-size: 12px;
+}
+
+.search-box input::placeholder {
+    color: #ffffffbd;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.logo .material-icons-round {
+    font-size: 35px;
+}
+
+.logo-text {
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.logo small {
+    display: block;
+    font-size: 9px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* القائمة الجانبية */
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: #0007;
+}
+
+.overlay.show {
+    display: block;
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 41;
+    width: min(290px, 85vw);
+    padding: 24px 18px;
+    background: var(--card);
+    transform: translateX(110%);
+    transition: transform .25s;
+    box-shadow: -5px 0 20px #0001;
+}
+
+.drawer.open {
+    transform: translateX(0);
+}
+
+.drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--blue);
+    font-size: 22px;
+    font-weight: 800;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.drawer button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    color: var(--text);
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    text-align: right;
+}
+
+.drawer button:hover {
+    background: var(--light-blue);
+}
+
+/* الإعلان */
+
+.ad-banner {
+    position: relative;
+    min-height: 150px;
+    margin: 14px 12px 16px;
+    border-radius: 15px;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, #062b4c88, #064a88a8),
+      url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1100&q=80')
+      center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.ad-content {
+    padding: 22px 12px;
+}
+
+.ad-content h1 {
+    font-size: clamp(21px, 5vw, 29px);
+    font-weight: 800;
+}
+
+.ad-content p {
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+.ad-label {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    background: #0874e8;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 7px;
+    font-size: 11px;
+}
+
+.ad-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.ad-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffffff80;
+}
+
+.ad-dots span:first-child {
+    background: white;
+}
+
+/* التصنيفات */
+
+.categories {
+    display: flex;
+    gap: 9px;
+    overflow-x: auto;
+    padding: 0 12px 9px;
+    scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar,
+.books-row::-webkit-scrollbar {
+    display: none;
+}
+
+.category {
+    flex: 0 0 82px;
+    min-height: 93px;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: #edf5ff;
+    color: var(--dark-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 3px;
+}
+
+.category .material-icons-round {
+    font-size: 28px;
+    color: #0758b8;
+}
+
+.category.active {
+    border-color: #8dbfff;
+    background: #d8eaff;
+}
+
+/* عناوين الأقسام */
+
+.section {
+    margin-top: 20px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark-blue);
+}
+
+.section-title .material-icons-round {
+    color: var(--blue);
+    font-size: 27px;
+}
+
+.see-all {
+    border: 0;
+    background: transparent;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* بطاقات الكتب */
+
+.books-row {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 3px 12px 10px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+}
+
+.book-card {
+    flex: 0 0 155px;
+    min-width: 0;
+    padding: 8px;
+    border-radius: 13px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    text-align: center;
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.book-card:active {
+    transform: scale(.97);
+}
+
+.book-cover {
+    width: 100%;
+    height: 164px;
+    object-fit: cover;
+    border-radius: 7px;
+    background: var(--light-blue);
+    display: block;
+}
+
+.book-title {
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.7;
+    margin-top: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-author {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.book-category {
+    display: inline-block;
+    margin-top: 6px;
+    background: var(--light-blue);
+    color: var(--blue);
+    border-radius: 20px;
+    padding: 2px 9px;
+    font-size: 10px;
+}
+
+.book-rating {
+    margin-top: 6px;
+    color: var(--text);
+    font-size: 12px;
+    direction: ltr;
+}
+
+.star {
+    color: #ffad21;
+}
+
+/* مزايا الموقع */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 12px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: var(--light-blue);
+    border-radius: 13px;
+}
+
+.feature .material-icons-round {
+    font-size: 27px;
+    color: var(--blue);
+}
+
+.feature strong {
+    display: block;
+    font-size: 12px;
+}
+
+.feature small {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* الشريط السفلي */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 25;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 73px;
+    padding: 6px 2px calc(6px + env(safe-area-inset-bottom));
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -3px 15px #173e6610;
+}
+
+.nav-item {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 0;
+}
+
+.nav-item .material-icons-round {
+    font-size: 24px;
+}
+
+.nav-item.active {
+    color: var(--blue);
+}
+
+/* نافذة تفاصيل الكتاب */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: #0008;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 420px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 18px;
+    background: var(--card);
+    color: var(--text);
+    text-align: center;
+}
+
+.modal-cover {
+    width: 135px;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 12px auto;
+}
+
+.modal-card h2 {
+    font-size: 20px;
+}
+
+.modal-card p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+    margin: 8px 0;
+}
+
+.action-btn {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    margin-top: 9px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--blue);
+    color: white;
+    font-weight: 700;
+}
+
+.action-btn.secondary {
+    background: var(--light-blue);
+    color: var(--blue);
+}
+
+.close-btn {
+    float: left;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+}
+
+/* الوضع الليلي */
+
+body.dark {
+    --bg: #0c1522;
+    --card: #142236;
+    --text: #e3edfc;
+    --dark-blue: #d6e8ff;
+    --light-blue: #1d3450;
+    --muted: #a2b4cd;
+    --border: #263951;
+    --shadow: 0 3px 12px #0002;
+}
+
+body.dark .category {
+    background: #1d3450;
+    color: #d6e8ff;
+}
+
+body.dark .category.active {
+    background: #24476e;
+}
+
+@media (min-width: 700px) {
+    .header {
+        padding: 14px 5%;
+    }
+
+    .ad-banner {
+        margin: 20px auto;
+        max-width: 1100px;
+        min-height: 230px;
+    }
+
+    .categories {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .category {
+        flex-basis: 105px;
+    }
+
+    .section {
+        max-width: 1200px;
+        margin: 25px auto 0;
+    }
+
+    .book-card {
+        flex-basis: 185px;
+    }
+
+    .book-cover {
+        height: 220px;
+    }
+
+    .features {
+        max-width: 1000px;
+        margin: 25px auto;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .bottom-nav {
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .nav-item {
+        flex: 0 1 110px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-row">
+
+        <button class="icon-btn" id="menuButton"
+                aria-label="فتح القائمة">
+            <span class="material-icons-round">menu</span>
+        </button>
+
+        <label class="search-box">
+            <span class="material-icons-round">search</span>
+            <input id="searchInput" type="search"
+                   placeholder="ابحث عن كتاب..."
+                   aria-label="البحث عن كتاب">
+        </label>
+
+        <div class="logo">
+            <span class="material-icons-round">auto_stories</span>
+            <div class="logo-text">
+                مكتبتي
+                <small>اقرأ لتتغير حياتك</small>
+            </div>
+        </div>
+
+        <button class="icon-btn" id="themeButton"
+                aria-label="تغيير المظهر">
+            <span class="material-icons-round">dark_mode</span>
+        </button>
+
+        <button class="icon-btn" id="shareButton"
+                aria-label="مشاركة الموقع">
+            <span class="material-icons-round">share</span>
+        </button>
+
+    </div>
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="drawer" id="drawer">
+    <div class="drawer-head">
+        <span>📚 مكتبتي</span>
+        <button class="icon-btn" id="closeDrawer"
+                style="color:var(--text)">
+            <span class="material-icons-round">close</span>
+        </button>
+    </div>
+
+    <button data-page="home">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button data-page="categories">
+        <span class="material-icons-round">grid_view</span>
+        الأقسام
+    </button>
+
+    <button data-page="library">
+        <span class="material-icons-round">auto_stories</span>
+        مكتبتي
+    </button>
+
+    <button data-page="notifications">
+        <span class="material-icons-round">notifications</span>
+        الإشعارات
+    </button>
+
+    <button data-page="profile">
+        <span class="material-icons-round">person</span>
+        الملف الشخصي
+    </button>
+</aside>
+
+<!-- مساحة الإعلان -->
+<section class="ad-banner" aria-label="مساحة إعلانية تجريبية">
+    <span class="ad-label">إعلان</span>
+
+    <div class="ad-content">
+        <h1>اقرأ لتتغير حياتك</h1>
+        <p>كل كتاب بداية جديدة</p>
+
+        <div class="ad-dots">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</section>
+
+<!-- التصنيفات -->
+<section class="categories" id="categories">
+
+    <button class="category active" data-category="الكل">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button class="category" data-category="دينية">
+        <span class="material-icons-round">mosque</span>
+        دينية
+    </button>
+
+    <button class="category" data-category="ثقافية">
+        <span class="material-icons-round">account_balance</span>
+        ثقافية
+    </button>
+
+    <button class="category" data-category="روايات وقصص">
+        <span class="material-icons-round">menu_book</span>
+        روايات وقصص
+    </button>
+
+    <button class="category" data-category="تعليمية">
+        <span class="material-icons-round">school</span>
+        تعليمية
+    </button>
+
+    <button class="category" data-category="تطوير الذات">
+        <span class="material-icons-round">trending_up</span>
+        تطوير الذات
+    </button>
+
+    <button class="category" data-category="علمية">
+        <span class="material-icons-round">science</span>
+        علمية
+    </button>
+
+    <button class="category" data-category="قانونية">
+        <span class="material-icons-round">balance</span>
+        قانونية
+    </button>
+
+    <button class="category" data-category="تقنية">
+        <span class="material-icons-round">memory</span>
+        تقنية
+    </button>
+
+</section>
+
+<main id="bookSections"></main>
+
+<!-- مزايا الموقع -->
+<section class="features">
+
+    <div class="feature">
+        <span class="material-icons-round">auto_stories</span>
+        <div>
+            <strong>مكتبة متنوعة</strong>
+            <small>كتب في مختلف المجالات</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">verified_user</span>
+        <div>
+            <strong>تجربة قراءة مريحة</strong>
+            <small>واجهة سهلة الاستخدام</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">devices</span>
+        <div>
+            <strong>متوافق مع الأجهزة</strong>
+            <small>هاتف وحاسوب ولوحي</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">favorite</span>
+        <div>
+            <strong>اكتشف عالمًا جديدًا</strong>
+            <small>مع مكتبتي</small>
+        </div>
+    </div>
+
+</section>
+
+<!-- القائمة السفلية -->
+<nav class="bottom-nav">
+
+    <button class="nav-item active" data-page="home">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button class="nav-item" data-page="categories">
+        <span class="material-icons-round">grid_view</span>
+        الأقسام
+    </button>
+
+    <button class="nav-item" data-page="library">
+        <span class="material-icons-round">auto_stories</span>
+        مكتبتي
+    </button>
+
+    <button class="nav-item" data-page="notifications">
+        <span class="material-icons-round">notifications_none</span>
+        الإشعارات
+    </button>
+
+    <button class="nav-item" data-page="profile">
+        <span class="material-icons-round">person_outline</span>
+        الملف الشخصي
+    </button>
+
+</nav>
+
+<!-- تفاصيل الكتاب -->
+<div class="modal" id="bookModal">
+    <div class="modal-card">
+        <button class="close-btn" id="closeModal"
+                aria-label="إغلاق">
+            <span class="material-icons-round">close</span>
+        </button>
+
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<script>
+/*
+  بيانات تجريبية للعرض فقط.
+  يمكن لاحقًا استبدالها بقاعدة بيانات حقيقية.
+*/
+
+const books = [
+    {
+        title: "العادات الذرية",
+        author: "جيمس كلير",
+        category: "تطوير الذات",
+        rating: "4.4",
+        cover: "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg",
+        description: "كتاب عن بناء العادات الصغيرة وتحسين السلوك تدريجيًا."
+    },
+    {
+        title: "الأب الغني والأب الفقير",
+        author: "روبرت كيوساكي",
+        category: "تطوير الذات",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg",
+        description: "كتاب يناقش طريقة التفكير في المال والاستثمار."
+    },
+    {
+        title: "أربعون حديثًا",
+        author: "الإمام النووي",
+        category: "دينية",
+        rating: "4.7",
+        cover: "https://covers.openlibrary.org/b/isbn/9789960892711-L.jpg",
+        description: "مجموعة من الأحاديث النبوية التي تجمع أبوابًا مهمة من الدين."
+    },
+    {
+        title: "القرآن الكريم",
+        author: "كتاب الله",
+        category: "دينية",
+        rating: "4.9",
+        cover: "https://covers.openlibrary.org/b/isbn/9781590080252-L.jpg",
+        description: "القرآن الكريم، كتاب الهداية للمسلمين."
+    },
+    {
+        title: "صحيح البخاري",
+        author: "الإمام البخاري",
+        category: "دينية",
+        rating: "4.8",
+        cover: "https://covers.openlibrary.org/b/isbn/9789960892827-L.jpg",
+        description: "من أشهر كتب الحديث النبوي."
+    },
+    {
+        title: "مئة عام من العزلة",
+        author: "غابرييل غارسيا ماركيز",
+        category: "روايات وقصص",
+        rating: "4.5",
+        cover: "https://covers.openlibrary.org/b/isbn/9780060883287-L.jpg",
+        description: "رواية أدبية تدور حول أجيال من عائلة بوينديا."
+    },
+    {
+        title: "فن التفكير",
+        author: "كتاب في التفكير",
+        category: "ثقافية",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9780062219695-L.jpg",
+        description: "موضوعات عن التفكير والتحليل واتخاذ القرارات."
+    },
+    {
+        title: "تاريخ الحضارات",
+        author: "مؤلفون متنوعون",
+        category: "ثقافية",
+        rating: "4.2",
+        cover: "https://covers.openlibrary.org/b/isbn/9780140444312-L.jpg",
+        description: "نظرة عامة إلى تاريخ الحضارات الإنسانية."
+    },
+    {
+        title: "مقدمة في العلوم",
+        author: "مؤلفون متنوعون",
+        category: "علمية",
+        rating: "4.4",
+        cover: "https://covers.openlibrary.org/b/isbn/9780199216805-L.jpg",
+        description: "مدخل مبسط إلى عدد من المفاهيم العلمية."
+    },
+    {
+        title: "أساسيات التقنية",
+        author: "مؤلفون متنوعون",
+        category: "تقنية",
+        rating: "4.1",
+        cover: "https://covers.openlibrary.org/b/isbn/9780131103627-L.jpg",
+        description: "موضوعات تمهيدية في عالم التقنية والحوسبة."
+    },
+    {
+        title: "مبادئ القانون",
+        author: "مؤلفون متنوعون",
+        category: "قانونية",
+        rating: "4.2",
+        cover: "https://covers.openlibrary.org/b/isbn/9780198863155-L.jpg",
+        description: "مقدمة عامة إلى مفاهيم قانونية أساسية."
+    },
+    {
+        title: "تعلم اللغة",
+        author: "مؤلفون متنوعون",
+        category: "تعليمية",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9780194202411-L.jpg",
+        description: "موضوعات تعليمية تساعد على اكتساب المعرفة."
+    }
+];
+
+const sections = [
+    { title: "كتب شائعة", category: "الكل", icon: "local_fire_department" },
+    { title: "كتب دينية", category: "دينية", icon: "mosque" },
+    { title: "كتب ثقافية", category: "ثقافية", icon: "account_balance" },
+    { title: "روايات وقصص", category: "روايات وقصص", icon: "auto_stories" },
+    { title: "كتب تعليمية", category: "تعليمية", icon: "school" },
+    { title: "تطوير الذات", category: "تطوير الذات", icon: "trending_up" },
+    { title: "كتب علمية", category: "علمية", icon: "science" },
+    { title: "كتب قانونية", category: "قانونية", icon: "balance" },
+    { title: "كتب تقنية", category: "تقنية", icon: "memory" }
+];
+
+const sectionsContainer = document.getElementById("bookSections");
+const searchInput = document.getElementById("searchInput");
+const bookModal = document.getElementById("bookModal");
+const modalContent = document.getElementById("modalContent");
+
+let activeCategory = "الكل";
+let searchTerm = "";
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+function renderBooks() {
+    sectionsContainer.innerHTML = "";
+
+    const filteredBooks = books.filter(book => {
+        const matchesCategory =
+            activeCategory === "الكل" ||
+            book.category === activeCategory;
+
+        const query = searchTerm.trim().toLowerCase();
+
+        const matchesSearch =
+            !query ||
+            book.title.toLowerCase().includes(query) ||
+            book.author.toLowerCase().includes(query) ||
+            book.category.toLowerCase().includes(query);
+
+        return matchesCategory && matchesSearch;
+    });
+
+    sections.forEach(section => {
+        const sectionBooks = filteredBooks.filter(book =>
+            section.category === "الكل"
+                ? true
+                : book.category === section.category
+        );
+
+        if (!sectionBooks.length) return;
+
+        const sectionElement = document.createElement("section");
+        sectionElement.className = "section";
+
+        sectionElement.innerHTML = `
+            <div class="section-heading">
+                <h2 class="section-title">
+                    <span class="material-icons-round">
+                        ${escapeHTML(section.icon)}
+                    </span>
+                    ${escapeHTML(section.title)}
+                </h2>
+
+                <button class="see-all"
+                        data-show-category="${escapeHTML(section.category)}">
+                    ‹ عرض الكل
+                </button>
+            </div>
+
+            <div class="books-row">
+                ${sectionBooks.map(book => `
+                    <article class="book-card"
+                             tabindex="0"
+                             role="button"
+                             data-book="${escapeHTML(book.title)}"
+                             aria-label="عرض ${escapeHTML(book.title)}">
+
+                        <img class="book-cover"
+                             src="${escapeHTML(book.cover)}"
+                             alt="غلاف ${escapeHTML(book.title)}"
+                             loading="lazy"
+                             onerror="this.onerror=null;this.src='https://placehold.co/300x420/eaf4ff/0d3b66?text=Book';">
+
+                        <h3 class="book-title">
+                            ${escapeHTML(book.title)}
+                        </h3>
+
+                        <p class="book-author">
+                            ${escapeHTML(book.author)}
+                        </p>
+
+                        <span class="book-category">
+                            ${escapeHTML(book.category)}
+                        </span>
+
+                        <div class="book-rating">
+                            <span class="star">★</span>
+                            ${escapeHTML(book.rating)}
+                        </div>
+                    </article>
+                `).join("")}
+            </div>
+        `;
+
+        sectionsContainer.appendChild(sectionElement);
+    });
+
+    if (!sectionsContainer.children.length) {
+        sectionsContainer.innerHTML = `
+            <p style="text-align:center;padding:40px 15px">
+                لم نعثر على كتب تطابق بحثك.
+            </p>
+        `;
+    }
+}
+
+function openBook(title) {
+    const book = books.find(item => item.title === title);
+    if (!book) return;
+
+    modalContent.innerHTML = `
+        <h2>${escapeHTML(book.title)}</h2>
+
+        <img class="modal-cover"
+             src="${escapeHTML(book.cover)}"
+             alt="غلاف الكتاب"
+             onerror="this.onerror=null;this.src='https://placehold.co/300x420/eaf4ff/0d3b66?text=Book';">
+
+        <p><strong>المؤلف:</strong>
+           ${escapeHTML(book.author)}</p>
+
+        <p><strong>القسم:</strong>
+           ${escapeHTML(book.category)}</p>
+
+        <p>${escapeHTML(book.description)}</p>
+
+        <button class="action-btn" id="readButton">
+            قراءة الكتاب
+        </button>
+
+        <button class="action-btn secondary" id="downloadButton">
+            تحميل PDF
+        </button>
+
+        <button class="action-btn secondary" id="favoriteButton">
+            ♡ إضافة إلى مكتبتي
+        </button>
+
+        <p id="bookMessage" aria-live="polite"></p>
+    `;
+
+    bookModal.classList.add("show");
+
+    document.getElementById("readButton").onclick = () => {
+        document.getElementById("bookMessage").textContent =
+            "ستتوفر القراءة بعد ربط ملف الكتاب الحقيقي.";
+    };
+
+    document.getElementById("downloadButton").onclick = () => {
+        document.getElementById("bookMessage").textContent =
+            "ستتوفر خاصية التحميل بعد إضافة رابط PDF حقيقي.";
+    };
+
+    document.getElementById("favoriteButton").onclick = () => {
+        let favorites = JSON.parse(
+            localStorage.getItem("maktabatiFavorites") || "[]"
+        );
+
+        if (favorites.includes(book.title)) {
+            document.getElementById("bookMessage").textContent =
+                "الكتاب موجود بالفعل في مكتبتي.";
+            return;
+        }
+
+        favorites.push(book.title);
+
+        localStorage.setItem(
+            "maktabatiFavorites",
+            JSON.stringify(favorites)
+        );
+
+        document.getElementById("bookMessage").textContent =
+            "أُضيف الكتاب إلى مكتبتك على هذا الجهاز.";
+    };
+}
+
+/* فتح الكتب */
+
+sectionsContainer.addEventListener("click", event => {
+    const card = event.target.closest("[data-book]");
+    const showCategory = event.target.closest("[data-show-category]");
+
+    if (card) {
+        openBook(card.dataset.book);
+    }
+
+    if (showCategory) {
+        selectCategory(showCategory.dataset.showCategory);
+        document.getElementById("categories").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+});
+
+sectionsContainer.addEventListener("keydown", event => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    const card = event.target.closest("[data-book]");
+    if (card) {
+        event.preventDefault();
+        openBook(card.dataset.book);
+    }
+});
+
+/* البحث */
+
+searchInput.addEventListener("input", () => {
+    searchTerm = searchInput.value;
+    renderBooks();
+});
+
+/* اختيار التصنيف */
+
+function selectCategory(category) {
+    activeCategory = category;
+
+    document.querySelectorAll(".category").forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.category === category
+        );
+    });
+
+    renderBooks();
+}
+
+document.querySelectorAll(".category").forEach(button => {
+    button.addEventListener("click", () => {
+        selectCategory(button.dataset.category);
+    });
+});
+
+/* الوضع الليلي */
+
+document.getElementById("themeButton").addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    const dark = document.body.classList.contains("dark");
+
+    document.getElementById("themeButton").innerHTML =
+        `<span class="material-icons-round">${
+            dark ? "light_mode" : "dark_mode"
+        }</span>`;
+
+    localStorage.setItem("maktabatiDark", dark ? "1" : "0");
+});
+
+if (localStorage.getItem("maktabatiDark") === "1") {
+    document.body.classList.add("dark");
+
+    document.getElementById("themeButton").innerHTML =
+        '<span class="material-icons-round">light_mode</span>';
+}
+
+/* القائمة الجانبية */
+
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
+
+function closeDrawer() {
+    drawer.classList.remove("open");
+    overlay.classList.remove("show");
+}
+
+document.getElementById("menuButton").onclick = () => {
+    drawer.classList.add("open");
+    overlay.classList.add("show");
+};
+
+document.getElementById("closeDrawer").onclick = closeDrawer;
+overlay.onclick = closeDrawer;
+
+/* إغلاق نافذة الكتاب */
+
+document.getElementById("closeModal").onclick = () => {
+    bookModal.classList.remove("show");
+};
+
+bookModal.addEventListener("click", event => {
+    if (event.target === bookModal) {
+        bookModal.classList.remove("show");
+    }
+});
+
+/* المشاركة */
+
+document.getElementById("shareButton").onclick = async () => {
+    const shareData = {
+        title: "مكتبتي",
+        text: "اكتشف عالم الكتب مع مكتبتي",
+        url: location.href
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(location.href);
+            alert("تم نسخ رابط الصفحة.");
+        } else {
+            alert("بعد نشر الموقع، يمكنك مشاركة رابطه مع الآخرين.");
+        }
+    } catch (error) {
+        if (error.name !== "AbortError") {
+            alert("تعذرت المشاركة من هذا المتصفح.");
+        }
+    }
+};
+
+/* أزرار التنقل */
+
+function navigate(page) {
+    closeDrawer();
+
+    document.querySelectorAll(".nav-item").forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.page === page
+        );
+    });
+
+    if (page === "home") {
+        activeCategory = "الكل";
+        searchInput.value = "";
+        searchTerm = "";
+        selectCategory("الكل");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+    }
+
+    if (page === "categories") {
+        document.getElementById("categories").scrollIntoView({
+            behavior: "smooth"
+        });
+        return;
+    }
+
+    if (page === "library") {
+        const favorites = JSON.parse(
+            localStorage.getItem("maktabatiFavorites") || "[]"
+        );
+
+        alert(
+            favorites.length
+                ? "كتبك المحفوظة:\n" + favorites.join("\n")
+                : "لم تضف أي كتاب إلى مكتبتك بعد."
+        );
+        return;
+    }
+
+    if (page === "notifications") {
+        alert("لا توجد إشعارات جديدة.");
+        return;
+    }
+
+    if (page === "profile") {
+        alert("سيُضاف الملف الشخصي عند تطوير الموقع.");
+    }
+}
+
+document.querySelectorAll("[data-page]").forEach(button => {
+    button.addEventListener("click", () => {
+        navigate(button.dataset.page);
+    });
+});
+
+/* عرض الصفحة الرئيسية */
+
+renderBooks();
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0866cc">
+<title>مكتبتي | اقرأ لتتغير حياتك</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<style>
+:root {
+    --blue: #0866cc;
+    --dark-blue: #0d3b66;
+    --light-blue: #eaf4ff;
+    --bg: #f7fbff;
+    --card: #ffffff;
+    --text: #153d70;
+    --muted: #7187a5;
+    --border: #e8eff8;
+    --shadow: 0 3px 12px rgba(23, 67, 115, .08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-bottom: 85px;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #54a6ff;
+    outline-offset: 2px;
+}
+
+/* رأس الصفحة */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: linear-gradient(110deg, #0755b6, #087ce9);
+    color: white;
+    padding: 12px 14px;
+    box-shadow: 0 3px 12px #063f831c;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+}
+
+.icon-btn {
+    width: 37px;
+    height: 40px;
+    flex-shrink: 0;
+    border: 0;
+    color: white;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+}
+
+.icon-btn:active {
+    background: #ffffff25;
+}
+
+.material-icons-round {
+    font-size: 25px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 70px;
+    height: 43px;
+    background: #ffffff24;
+    border-radius: 25px;
+    padding: 0 10px;
+}
+
+.search-box input {
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: white;
+    font-size: 12px;
+}
+
+.search-box input::placeholder {
+    color: #ffffffbd;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.logo .material-icons-round {
+    font-size: 35px;
+}
+
+.logo-text {
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.logo small {
+    display: block;
+    font-size: 9px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* القائمة الجانبية */
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: #0007;
+}
+
+.overlay.show {
+    display: block;
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 41;
+    width: min(290px, 85vw);
+    padding: 24px 18px;
+    background: var(--card);
+    transform: translateX(110%);
+    transition: transform .25s;
+    box-shadow: -5px 0 20px #0001;
+}
+
+.drawer.open {
+    transform: translateX(0);
+}
+
+.drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--blue);
+    font-size: 22px;
+    font-weight: 800;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.drawer button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    color: var(--text);
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    text-align: right;
+}
+
+.drawer button:hover {
+    background: var(--light-blue);
+}
+
+/* الإعلان */
+
+.ad-banner {
+    position: relative;
+    min-height: 150px;
+    margin: 14px 12px 16px;
+    border-radius: 15px;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, #062b4c88, #064a88a8),
+      url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1100&q=80')
+      center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.ad-content {
+    padding: 22px 12px;
+}
+
+.ad-content h1 {
+    font-size: clamp(21px, 5vw, 29px);
+    font-weight: 800;
+}
+
+.ad-content p {
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+.ad-label {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    background: #0874e8;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 7px;
+    font-size: 11px;
+}
+
+.ad-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.ad-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffffff80;
+}
+
+.ad-dots span:first-child {
+    background: white;
+}
+
+/* التصنيفات */
+
+.categories {
+    display: flex;
+    gap: 9px;
+    overflow-x: auto;
+    padding: 0 12px 9px;
+    scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar,
+.books-row::-webkit-scrollbar {
+    display: none;
+}
+
+.category {
+    flex: 0 0 82px;
+    min-height: 93px;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: #edf5ff;
+    color: var(--dark-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 3px;
+}
+
+.category .material-icons-round {
+    font-size: 28px;
+    color: #0758b8;
+}
+
+.category.active {
+    border-color: #8dbfff;
+    background: #d8eaff;
+}
+
+/* عناوين الأقسام */
+
+.section {
+    margin-top: 20px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark-blue);
+}
+
+.section-title .material-icons-round {
+    color: var(--blue);
+    font-size: 27px;
+}
+
+.see-all {
+    border: 0;
+    background: transparent;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* بطاقات الكتب */
+
+.books-row {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 3px 12px 10px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+}
+
+.book-card {
+    flex: 0 0 155px;
+    min-width: 0;
+    padding: 8px;
+    border-radius: 13px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    text-align: center;
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.book-card:active {
+    transform: scale(.97);
+}
+
+.book-cover {
+    width: 100%;
+    height: 164px;
+    object-fit: cover;
+    border-radius: 7px;
+    background: var(--light-blue);
+    display: block;
+}
+
+.book-title {
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.7;
+    margin-top: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-author {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.book-category {
+    display: inline-block;
+    margin-top: 6px;
+    background: var(--light-blue);
+    color: var(--blue);
+    border-radius: 20px;
+    padding: 2px 9px;
+    font-size: 10px;
+}
+
+.book-rating {
+    margin-top: 6px;
+    color: var(--text);
+    font-size: 12px;
+    direction: ltr;
+}
+
+.star {
+    color: #ffad21;
+}
+
+/* مزايا الموقع */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 12px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: var(--light-blue);
+    border-radius: 13px;
+}
+
+.feature .material-icons-round {
+    font-size: 27px;
+    color: var(--blue);
+}
+
+.feature strong {
+    display: block;
+    font-size: 12px;
+}
+
+.feature small {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* الشريط السفلي */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 25;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 73px;
+    padding: 6px 2px calc(6px + env(safe-area-inset-bottom));
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -3px 15px #173e6610;
+}
+
+.nav-item {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 0;
+}
+
+.nav-item .material-icons-round {
+    font-size: 24px;
+}
+
+.nav-item.active {
+    color: var(--blue);
+}
+
+/* نافذة تفاصيل الكتاب */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: #0008;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 420px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 18px;
+    background: var(--card);
+    color: var(--text);
+    text-align: center;
+}
+
+.modal-cover {
+    width: 135px;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 12px auto;
+}
+
+.modal-card h2 {
+    font-size: 20px;
+}
+
+.modal-card p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+    margin: 8px 0;
+}
+
+.action-btn {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    margin-top: 9px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--blue);
+    color: white;
+    font-weight: 700;
+}
+
+.action-btn.secondary {
+    background: var(--light-blue);
+    color: var(--blue);
+}
+
+.close-btn {
+    float: left;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+}
+
+/* الوضع الليلي */
+
+body.dark {
+    --bg: #0c1522;
+    --card: #142236;
+    --text: #e3edfc;
+    --dark-blue: #d6e8ff;
+    --light-blue: #1d3450;
+    --muted: #a2b4cd;
+    --border: #263951;
+    --shadow: 0 3px 12px #0002;
+}
+
+body.dark .category {
+    background: #1d3450;
+    color: #d6e8ff;
+}
+
+body.dark .category.active {
+    background: #24476e;
+}
+
+@media (min-width: 700px) {
+    .header {
+        padding: 14px 5%;
+    }
+
+    .ad-banner {
+        margin: 20px auto;
+        max-width: 1100px;
+        min-height: 230px;
+    }
+
+    .categories {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .category {
+        flex-basis: 105px;
+    }
+
+    .section {
+        max-width: 1200px;
+        margin: 25px auto 0;
+    }
+
+    .book-card {
+        flex-basis: 185px;
+    }
+
+    .book-cover {
+        height: 220px;
+    }
+
+    .features {
+        max-width: 1000px;
+        margin: 25px auto;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .bottom-nav {
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .nav-item {
+        flex: 0 1 110px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-row">
+
+        <button class="icon-btn" id="menuButton"
+                aria-label="فتح القائمة">
+            <span class="material-icons-round">menu</span>
+        </button>
+
+        <label class="search-box">
+            <span class="material-icons-round">search</span>
+            <input id="searchInput" type="search"
+                   placeholder="ابحث عن كتاب..."
+                   aria-label="البحث عن كتاب">
+        </label>
+
+        <div class="logo">
+            <span class="material-icons-round">auto_stories</span>
+            <div class="logo-text">
+                مكتبتي
+                <small>اقرأ لتتغير حياتك</small>
+            </div>
+        </div>
+
+        <button class="icon-btn" id="themeButton"
+                aria-label="تغيير المظهر">
+            <span class="material-icons-round">dark_mode</span>
+        </button>
+
+        <button class="icon-btn" id="shareButton"
+                aria-label="مشاركة الموقع">
+            <span class="material-icons-round">share</span>
+        </button>
+
+    </div>
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="drawer" id="drawer">
+    <div class="drawer-head">
+        <span>📚 مكتبتي</span>
+        <button class="icon-btn" id="closeDrawer"
+                style="color:var(--text)">
+            <span class="material-icons-round">close</span>
+        </button>
+    </div>
+
+    <button data-page="home">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button data-page="categories">
+        <span class="material-icons-round">grid_view</span>
+        الأقسام
+    </button>
+
+    <button data-page="library">
+        <span class="material-icons-round">auto_stories</span>
+        مكتبتي
+    </button>
+
+    <button data-page="notifications">
+        <span class="material-icons-round">notifications</span>
+        الإشعارات
+    </button>
+
+    <button data-page="profile">
+        <span class="material-icons-round">person</span>
+        الملف الشخصي
+    </button>
+</aside>
+
+<!-- مساحة الإعلان -->
+<section class="ad-banner" aria-label="مساحة إعلانية تجريبية">
+    <span class="ad-label">إعلان</span>
+
+    <div class="ad-content">
+        <h1>اقرأ لتتغير حياتك</h1>
+        <p>كل كتاب بداية جديدة</p>
+
+        <div class="ad-dots">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</section>
+
+<!-- التصنيفات -->
+<section class="categories" id="categories">
+
+    <button class="category active" data-category="الكل">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button class="category" data-category="دينية">
+        <span class="material-icons-round">mosque</span>
+        دينية
+    </button>
+
+    <button class="category" data-category="ثقافية">
+        <span class="material-icons-round">account_balance</span>
+        ثقافية
+    </button>
+
+    <button class="category" data-category="روايات وقصص">
+        <span class="material-icons-round">menu_book</span>
+        روايات وقصص
+    </button>
+
+    <button class="category" data-category="تعليمية">
+        <span class="material-icons-round">school</span>
+        تعليمية
+    </button>
+
+    <button class="category" data-category="تطوير الذات">
+        <span class="material-icons-round">trending_up</span>
+        تطوير الذات
+    </button>
+
+    <button class="category" data-category="علمية">
+        <span class="material-icons-round">science</span>
+        علمية
+    </button>
+
+    <button class="category" data-category="قانونية">
+        <span class="material-icons-round">balance</span>
+        قانونية
+    </button>
+
+    <button class="category" data-category="تقنية">
+        <span class="material-icons-round">memory</span>
+        تقنية
+    </button>
+
+</section>
+
+<main id="bookSections"></main>
+
+<!-- مزايا الموقع -->
+<section class="features">
+
+    <div class="feature">
+        <span class="material-icons-round">auto_stories</span>
+        <div>
+            <strong>مكتبة متنوعة</strong>
+            <small>كتب في مختلف المجالات</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">verified_user</span>
+        <div>
+            <strong>تجربة قراءة مريحة</strong>
+            <small>واجهة سهلة الاستخدام</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">devices</span>
+        <div>
+            <strong>متوافق مع الأجهزة</strong>
+            <small>هاتف وحاسوب ولوحي</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">favorite</span>
+        <div>
+            <strong>اكتشف عالمًا جديدًا</strong>
+            <small>مع مكتبتي</small>
+        </div>
+    </div>
+
+</section>
+
+<!-- القائمة السفلية -->
+<nav class="bottom-nav">
+
+    <button class="nav-item active" data-page="home">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button class="nav-item" data-page="categories">
+        <span class="material-icons-round">grid_view</span>
+        الأقسام
+    </button>
+
+    <button class="nav-item" data-page="library">
+        <span class="material-icons-round">auto_stories</span>
+        مكتبتي
+    </button>
+
+    <button class="nav-item" data-page="notifications">
+        <span class="material-icons-round">notifications_none</span>
+        الإشعارات
+    </button>
+
+    <button class="nav-item" data-page="profile">
+        <span class="material-icons-round">person_outline</span>
+        الملف الشخصي
+    </button>
+
+</nav>
+
+<!-- تفاصيل الكتاب -->
+<div class="modal" id="bookModal">
+    <div class="modal-card">
+        <button class="close-btn" id="closeModal"
+                aria-label="إغلاق">
+            <span class="material-icons-round">close</span>
+        </button>
+
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<script>
+/*
+  بيانات تجريبية للعرض فقط.
+  يمكن لاحقًا استبدالها بقاعدة بيانات حقيقية.
+*/
+
+const books = [
+    {
+        title: "العادات الذرية",
+        author: "جيمس كلير",
+        category: "تطوير الذات",
+        rating: "4.4",
+        cover: "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg",
+        description: "كتاب عن بناء العادات الصغيرة وتحسين السلوك تدريجيًا."
+    },
+    {
+        title: "الأب الغني والأب الفقير",
+        author: "روبرت كيوساكي",
+        category: "تطوير الذات",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg",
+        description: "كتاب يناقش طريقة التفكير في المال والاستثمار."
+    },
+    {
+        title: "أربعون حديثًا",
+        author: "الإمام النووي",
+        category: "دينية",
+        rating: "4.7",
+        cover: "https://covers.openlibrary.org/b/isbn/9789960892711-L.jpg",
+        description: "مجموعة من الأحاديث النبوية التي تجمع أبوابًا مهمة من الدين."
+    },
+    {
+        title: "القرآن الكريم",
+        author: "كتاب الله",
+        category: "دينية",
+        rating: "4.9",
+        cover: "https://covers.openlibrary.org/b/isbn/9781590080252-L.jpg",
+        description: "القرآن الكريم، كتاب الهداية للمسلمين."
+    },
+    {
+        title: "صحيح البخاري",
+        author: "الإمام البخاري",
+        category: "دينية",
+        rating: "4.8",
+        cover: "https://covers.openlibrary.org/b/isbn/9789960892827-L.jpg",
+        description: "من أشهر كتب الحديث النبوي."
+    },
+    {
+        title: "مئة عام من العزلة",
+        author: "غابرييل غارسيا ماركيز",
+        category: "روايات وقصص",
+        rating: "4.5",
+        cover: "https://covers.openlibrary.org/b/isbn/9780060883287-L.jpg",
+        description: "رواية أدبية تدور حول أجيال من عائلة بوينديا."
+    },
+    {
+        title: "فن التفكير",
+        author: "كتاب في التفكير",
+        category: "ثقافية",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9780062219695-L.jpg",
+        description: "موضوعات عن التفكير والتحليل واتخاذ القرارات."
+    },
+    {
+        title: "تاريخ الحضارات",
+        author: "مؤلفون متنوعون",
+        category: "ثقافية",
+        rating: "4.2",
+        cover: "https://covers.openlibrary.org/b/isbn/9780140444312-L.jpg",
+        description: "نظرة عامة إلى تاريخ الحضارات الإنسانية."
+    },
+    {
+        title: "مقدمة في العلوم",
+        author: "مؤلفون متنوعون",
+        category: "علمية",
+        rating: "4.4",
+        cover: "https://covers.openlibrary.org/b/isbn/9780199216805-L.jpg",
+        description: "مدخل مبسط إلى عدد من المفاهيم العلمية."
+    },
+    {
+        title: "أساسيات التقنية",
+        author: "مؤلفون متنوعون",
+        category: "تقنية",
+        rating: "4.1",
+        cover: "https://covers.openlibrary.org/b/isbn/9780131103627-L.jpg",
+        description: "موضوعات تمهيدية في عالم التقنية والحوسبة."
+    },
+    {
+        title: "مبادئ القانون",
+        author: "مؤلفون متنوعون",
+        category: "قانونية",
+        rating: "4.2",
+        cover: "https://covers.openlibrary.org/b/isbn/9780198863155-L.jpg",
+        description: "مقدمة عامة إلى مفاهيم قانونية أساسية."
+    },
+    {
+        title: "تعلم اللغة",
+        author: "مؤلفون متنوعون",
+        category: "تعليمية",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9780194202411-L.jpg",
+        description: "موضوعات تعليمية تساعد على اكتساب المعرفة."
+    }
+];
+
+const sections = [
+    { title: "كتب شائعة", category: "الكل", icon: "local_fire_department" },
+    { title: "كتب دينية", category: "دينية", icon: "mosque" },
+    { title: "كتب ثقافية", category: "ثقافية", icon: "account_balance" },
+    { title: "روايات وقصص", category: "روايات وقصص", icon: "auto_stories" },
+    { title: "كتب تعليمية", category: "تعليمية", icon: "school" },
+    { title: "تطوير الذات", category: "تطوير الذات", icon: "trending_up" },
+    { title: "كتب علمية", category: "علمية", icon: "science" },
+    { title: "كتب قانونية", category: "قانونية", icon: "balance" },
+    { title: "كتب تقنية", category: "تقنية", icon: "memory" }
+];
+
+const sectionsContainer = document.getElementById("bookSections");
+const searchInput = document.getElementById("searchInput");
+const bookModal = document.getElementById("bookModal");
+const modalContent = document.getElementById("modalContent");
+
+let activeCategory = "الكل";
+let searchTerm = "";
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+function renderBooks() {
+    sectionsContainer.innerHTML = "";
+
+    const filteredBooks = books.filter(book => {
+        const matchesCategory =
+            activeCategory === "الكل" ||
+            book.category === activeCategory;
+
+        const query = searchTerm.trim().toLowerCase();
+
+        const matchesSearch =
+            !query ||
+            book.title.toLowerCase().includes(query) ||
+            book.author.toLowerCase().includes(query) ||
+            book.category.toLowerCase().includes(query);
+
+        return matchesCategory && matchesSearch;
+    });
+
+    sections.forEach(section => {
+        const sectionBooks = filteredBooks.filter(book =>
+            section.category === "الكل"
+                ? true
+                : book.category === section.category
+        );
+
+        if (!sectionBooks.length) return;
+
+        const sectionElement = document.createElement("section");
+        sectionElement.className = "section";
+
+        sectionElement.innerHTML = `
+            <div class="section-heading">
+                <h2 class="section-title">
+                    <span class="material-icons-round">
+                        ${escapeHTML(section.icon)}
+                    </span>
+                    ${escapeHTML(section.title)}
+                </h2>
+
+                <button class="see-all"
+                        data-show-category="${escapeHTML(section.category)}">
+                    ‹ عرض الكل
+                </button>
+            </div>
+
+            <div class="books-row">
+                ${sectionBooks.map(book => `
+                    <article class="book-card"
+                             tabindex="0"
+                             role="button"
+                             data-book="${escapeHTML(book.title)}"
+                             aria-label="عرض ${escapeHTML(book.title)}">
+
+                        <img class="book-cover"
+                             src="${escapeHTML(book.cover)}"
+                             alt="غلاف ${escapeHTML(book.title)}"
+                             loading="lazy"
+                             onerror="this.onerror=null;this.src='https://placehold.co/300x420/eaf4ff/0d3b66?text=Book';">
+
+                        <h3 class="book-title">
+                            ${escapeHTML(book.title)}
+                        </h3>
+
+                        <p class="book-author">
+                            ${escapeHTML(book.author)}
+                        </p>
+
+                        <span class="book-category">
+                            ${escapeHTML(book.category)}
+                        </span>
+
+                        <div class="book-rating">
+                            <span class="star">★</span>
+                            ${escapeHTML(book.rating)}
+                        </div>
+                    </article>
+                `).join("")}
+            </div>
+        `;
+
+        sectionsContainer.appendChild(sectionElement);
+    });
+
+    if (!sectionsContainer.children.length) {
+        sectionsContainer.innerHTML = `
+            <p style="text-align:center;padding:40px 15px">
+                لم نعثر على كتب تطابق بحثك.
+            </p>
+        `;
+    }
+}
+
+function openBook(title) {
+    const book = books.find(item => item.title === title);
+    if (!book) return;
+
+    modalContent.innerHTML = `
+        <h2>${escapeHTML(book.title)}</h2>
+
+        <img class="modal-cover"
+             src="${escapeHTML(book.cover)}"
+             alt="غلاف الكتاب"
+             onerror="this.onerror=null;this.src='https://placehold.co/300x420/eaf4ff/0d3b66?text=Book';">
+
+        <p><strong>المؤلف:</strong>
+           ${escapeHTML(book.author)}</p>
+
+        <p><strong>القسم:</strong>
+           ${escapeHTML(book.category)}</p>
+
+        <p>${escapeHTML(book.description)}</p>
+
+        <button class="action-btn" id="readButton">
+            قراءة الكتاب
+        </button>
+
+        <button class="action-btn secondary" id="downloadButton">
+            تحميل PDF
+        </button>
+
+        <button class="action-btn secondary" id="favoriteButton">
+            ♡ إضافة إلى مكتبتي
+        </button>
+
+        <p id="bookMessage" aria-live="polite"></p>
+    `;
+
+    bookModal.classList.add("show");
+
+    document.getElementById("readButton").onclick = () => {
+        document.getElementById("bookMessage").textContent =
+            "ستتوفر القراءة بعد ربط ملف الكتاب الحقيقي.";
+    };
+
+    document.getElementById("downloadButton").onclick = () => {
+        document.getElementById("bookMessage").textContent =
+            "ستتوفر خاصية التحميل بعد إضافة رابط PDF حقيقي.";
+    };
+
+    document.getElementById("favoriteButton").onclick = () => {
+        let favorites = JSON.parse(
+            localStorage.getItem("maktabatiFavorites") || "[]"
+        );
+
+        if (favorites.includes(book.title)) {
+            document.getElementById("bookMessage").textContent =
+                "الكتاب موجود بالفعل في مكتبتي.";
+            return;
+        }
+
+        favorites.push(book.title);
+
+        localStorage.setItem(
+            "maktabatiFavorites",
+            JSON.stringify(favorites)
+        );
+
+        document.getElementById("bookMessage").textContent =
+            "أُضيف الكتاب إلى مكتبتك على هذا الجهاز.";
+    };
+}
+
+/* فتح الكتب */
+
+sectionsContainer.addEventListener("click", event => {
+    const card = event.target.closest("[data-book]");
+    const showCategory = event.target.closest("[data-show-category]");
+
+    if (card) {
+        openBook(card.dataset.book);
+    }
+
+    if (showCategory) {
+        selectCategory(showCategory.dataset.showCategory);
+        document.getElementById("categories").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+});
+
+sectionsContainer.addEventListener("keydown", event => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    const card = event.target.closest("[data-book]");
+    if (card) {
+        event.preventDefault();
+        openBook(card.dataset.book);
+    }
+});
+
+/* البحث */
+
+searchInput.addEventListener("input", () => {
+    searchTerm = searchInput.value;
+    renderBooks();
+});
+
+/* اختيار التصنيف */
+
+function selectCategory(category) {
+    activeCategory = category;
+
+    document.querySelectorAll(".category").forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.category === category
+        );
+    });
+
+    renderBooks();
+}
+
+document.querySelectorAll(".category").forEach(button => {
+    button.addEventListener("click", () => {
+        selectCategory(button.dataset.category);
+    });
+});
+
+/* الوضع الليلي */
+
+document.getElementById("themeButton").addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    const dark = document.body.classList.contains("dark");
+
+    document.getElementById("themeButton").innerHTML =
+        `<span class="material-icons-round">${
+            dark ? "light_mode" : "dark_mode"
+        }</span>`;
+
+    localStorage.setItem("maktabatiDark", dark ? "1" : "0");
+});
+
+if (localStorage.getItem("maktabatiDark") === "1") {
+    document.body.classList.add("dark");
+
+    document.getElementById("themeButton").innerHTML =
+        '<span class="material-icons-round">light_mode</span>';
+}
+
+/* القائمة الجانبية */
+
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
+
+function closeDrawer() {
+    drawer.classList.remove("open");
+    overlay.classList.remove("show");
+}
+
+document.getElementById("menuButton").onclick = () => {
+    drawer.classList.add("open");
+    overlay.classList.add("show");
+};
+
+document.getElementById("closeDrawer").onclick = closeDrawer;
+overlay.onclick = closeDrawer;
+
+/* إغلاق نافذة الكتاب */
+
+document.getElementById("closeModal").onclick = () => {
+    bookModal.classList.remove("show");
+};
+
+bookModal.addEventListener("click", event => {
+    if (event.target === bookModal) {
+        bookModal.classList.remove("show");
+    }
+});
+
+/* المشاركة */
+
+document.getElementById("shareButton").onclick = async () => {
+    const shareData = {
+        title: "مكتبتي",
+        text: "اكتشف عالم الكتب مع مكتبتي",
+        url: location.href
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(location.href);
+            alert("تم نسخ رابط الصفحة.");
+        } else {
+            alert("بعد نشر الموقع، يمكنك مشاركة رابطه مع الآخرين.");
+        }
+    } catch (error) {
+        if (error.name !== "AbortError") {
+            alert("تعذرت المشاركة من هذا المتصفح.");
+        }
+    }
+};
+
+/* أزرار التنقل */
+
+function navigate(page) {
+    closeDrawer();
+
+    document.querySelectorAll(".nav-item").forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.page === page
+        );
+    });
+
+    if (page === "home") {
+        activeCategory = "الكل";
+        searchInput.value = "";
+        searchTerm = "";
+        selectCategory("الكل");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+    }
+
+    if (page === "categories") {
+        document.getElementById("categories").scrollIntoView({
+            behavior: "smooth"
+        });
+        return;
+    }
+
+    if (page === "library") {
+        const favorites = JSON.parse(
+            localStorage.getItem("maktabatiFavorites") || "[]"
+        );
+
+        alert(
+            favorites.length
+                ? "كتبك المحفوظة:\n" + favorites.join("\n")
+                : "لم تضف أي كتاب إلى مكتبتك بعد."
+        );
+        return;
+    }
+
+    if (page === "notifications") {
+        alert("لا توجد إشعارات جديدة.");
+        return;
+    }
+
+    if (page === "profile") {
+        alert("سيُضاف الملف الشخصي عند تطوير الموقع.");
+    }
+}
+
+document.querySelectorAll("[data-page]").forEach(button => {
+    button.addEventListener("click", () => {
+        navigate(button.dataset.page);
+    });
+});
+
+/* عرض الصفحة الرئيسية */
+
+renderBooks();
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0866cc">
+<title>مكتبتي | اقرأ لتتغير حياتك</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<style>
+:root {
+    --blue: #0866cc;
+    --dark-blue: #0d3b66;
+    --light-blue: #eaf4ff;
+    --bg: #f7fbff;
+    --card: #ffffff;
+    --text: #153d70;
+    --muted: #7187a5;
+    --border: #e8eff8;
+    --shadow: 0 3px 12px rgba(23, 67, 115, .08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-bottom: 85px;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #54a6ff;
+    outline-offset: 2px;
+}
+
+/* رأس الصفحة */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: linear-gradient(110deg, #0755b6, #087ce9);
+    color: white;
+    padding: 12px 14px;
+    box-shadow: 0 3px 12px #063f831c;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+}
+
+.icon-btn {
+    width: 37px;
+    height: 40px;
+    flex-shrink: 0;
+    border: 0;
+    color: white;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+}
+
+.icon-btn:active {
+    background: #ffffff25;
+}
+
+.material-icons-round {
+    font-size: 25px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 70px;
+    height: 43px;
+    background: #ffffff24;
+    border-radius: 25px;
+    padding: 0 10px;
+}
+
+.search-box input {
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: white;
+    font-size: 12px;
+}
+
+.search-box input::placeholder {
+    color: #ffffffbd;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.logo .material-icons-round {
+    font-size: 35px;
+}
+
+.logo-text {
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.logo small {
+    display: block;
+    font-size: 9px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* القائمة الجانبية */
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: #0007;
+}
+
+.overlay.show {
+    display: block;
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 41;
+    width: min(290px, 85vw);
+    padding: 24px 18px;
+    background: var(--card);
+    transform: translateX(110%);
+    transition: transform .25s;
+    box-shadow: -5px 0 20px #0001;
+}
+
+.drawer.open {
+    transform: translateX(0);
+}
+
+.drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--blue);
+    font-size: 22px;
+    font-weight: 800;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.drawer button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    color: var(--text);
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    text-align: right;
+}
+
+.drawer button:hover {
+    background: var(--light-blue);
+}
+
+/* الإعلان */
+
+.ad-banner {
+    position: relative;
+    min-height: 150px;
+    margin: 14px 12px 16px;
+    border-radius: 15px;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, #062b4c88, #064a88a8),
+      url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1100&q=80')
+      center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.ad-content {
+    padding: 22px 12px;
+}
+
+.ad-content h1 {
+    font-size: clamp(21px, 5vw, 29px);
+    font-weight: 800;
+}
+
+.ad-content p {
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+.ad-label {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    background: #0874e8;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 7px;
+    font-size: 11px;
+}
+
+.ad-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.ad-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffffff80;
+}
+
+.ad-dots span:first-child {
+    background: white;
+}
+
+/* التصنيفات */
+
+.categories {
+    display: flex;
+    gap: 9px;
+    overflow-x: auto;
+    padding: 0 12px 9px;
+    scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar,
+.books-row::-webkit-scrollbar {
+    display: none;
+}
+
+.category {
+    flex: 0 0 82px;
+    min-height: 93px;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: #edf5ff;
+    color: var(--dark-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 3px;
+}
+
+.category .material-icons-round {
+    font-size: 28px;
+    color: #0758b8;
+}
+
+.category.active {
+    border-color: #8dbfff;
+    background: #d8eaff;
+}
+
+/* عناوين الأقسام */
+
+.section {
+    margin-top: 20px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark-blue);
+}
+
+.section-title .material-icons-round {
+    color: var(--blue);
+    font-size: 27px;
+}
+
+.see-all {
+    border: 0;
+    background: transparent;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* بطاقات الكتب */
+
+.books-row {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 3px 12px 10px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+}
+
+.book-card {
+    flex: 0 0 155px;
+    min-width: 0;
+    padding: 8px;
+    border-radius: 13px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    text-align: center;
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.book-card:active {
+    transform: scale(.97);
+}
+
+.book-cover {
+    width: 100%;
+    height: 164px;
+    object-fit: cover;
+    border-radius: 7px;
+    background: var(--light-blue);
+    display: block;
+}
+
+.book-title {
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.7;
+    margin-top: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-author {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.book-category {
+    display: inline-block;
+    margin-top: 6px;
+    background: var(--light-blue);
+    color: var(--blue);
+    border-radius: 20px;
+    padding: 2px 9px;
+    font-size: 10px;
+}
+
+.book-rating {
+    margin-top: 6px;
+    color: var(--text);
+    font-size: 12px;
+    direction: ltr;
+}
+
+.star {
+    color: #ffad21;
+}
+
+/* مزايا الموقع */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 12px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: var(--light-blue);
+    border-radius: 13px;
+}
+
+.feature .material-icons-round {
+    font-size: 27px;
+    color: var(--blue);
+}
+
+.feature strong {
+    display: block;
+    font-size: 12px;
+}
+
+.feature small {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* الشريط السفلي */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 25;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 73px;
+    padding: 6px 2px calc(6px + env(safe-area-inset-bottom));
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -3px 15px #173e6610;
+}
+
+.nav-item {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 0;
+}
+
+.nav-item .material-icons-round {
+    font-size: 24px;
+}
+
+.nav-item.active {
+    color: var(--blue);
+}
+
+/* نافذة تفاصيل الكتاب */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: #0008;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 420px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 18px;
+    background: var(--card);
+    color: var(--text);
+    text-align: center;
+}
+
+.modal-cover {
+    width: 135px;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 12px auto;
+}
+
+.modal-card h2 {
+    font-size: 20px;
+}
+
+.modal-card p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+    margin: 8px 0;
+}
+
+.action-btn {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    margin-top: 9px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--blue);
+    color: white;
+    font-weight: 700;
+}
+
+.action-btn.secondary {
+    background: var(--light-blue);
+    color: var(--blue);
+}
+
+.close-btn {
+    float: left;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+}
+
+/* الوضع الليلي */
+
+body.dark {
+    --bg: #0c1522;
+    --card: #142236;
+    --text: #e3edfc;
+    --dark-blue: #d6e8ff;
+    --light-blue: #1d3450;
+    --muted: #a2b4cd;
+    --border: #263951;
+    --shadow: 0 3px 12px #0002;
+}
+
+body.dark .category {
+    background: #1d3450;
+    color: #d6e8ff;
+}
+
+body.dark .category.active {
+    background: #24476e;
+}
+
+@media (min-width: 700px) {
+    .header {
+        padding: 14px 5%;
+    }
+
+    .ad-banner {
+        margin: 20px auto;
+        max-width: 1100px;
+        min-height: 230px;
+    }
+
+    .categories {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .category {
+        flex-basis: 105px;
+    }
+
+    .section {
+        max-width: 1200px;
+        margin: 25px auto 0;
+    }
+
+    .book-card {
+        flex-basis: 185px;
+    }
+
+    .book-cover {
+        height: 220px;
+    }
+
+    .features {
+        max-width: 1000px;
+        margin: 25px auto;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .bottom-nav {
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .nav-item {
+        flex: 0 1 110px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-row">
+
+        <button class="icon-btn" id="menuButton"
+                aria-label="فتح القائمة">
+            <span class="material-icons-round">menu</span>
+        </button>
+
+        <label class="search-box">
+            <span class="material-icons-round">search</span>
+            <input id="searchInput" type="search"
+                   placeholder="ابحث عن كتاب..."
+                   aria-label="البحث عن كتاب">
+        </label>
+
+        <div class="logo">
+            <span class="material-icons-round">auto_stories</span>
+            <div class="logo-text">
+                مكتبتي
+                <small>اقرأ لتتغير حياتك</small>
+            </div>
+        </div>
+
+        <button class="icon-btn" id="themeButton"
+                aria-label="تغيير المظهر">
+            <span class="material-icons-round">dark_mode</span>
+        </button>
+
+        <button class="icon-btn" id="shareButton"
+                aria-label="مشاركة الموقع">
+            <span class="material-icons-round">share</span>
+        </button>
+
+    </div>
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="drawer" id="drawer">
+    <div class="drawer-head">
+        <span>📚 مكتبتي</span>
+        <button class="icon-btn" id="closeDrawer"
+                style="color:var(--text)">
+            <span class="material-icons-round">close</span>
+        </button>
+    </div>
+
+    <button data-page="home">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button data-page="categories">
+        <span class="material-icons-round">grid_view</span>
+        الأقسام
+    </button>
+
+    <button data-page="library">
+        <span class="material-icons-round">auto_stories</span>
+        مكتبتي
+    </button>
+
+    <button data-page="notifications">
+        <span class="material-icons-round">notifications</span>
+        الإشعارات
+    </button>
+
+    <button data-page="profile">
+        <span class="material-icons-round">person</span>
+        الملف الشخصي
+    </button>
+</aside>
+
+<!-- مساحة الإعلان -->
+<section class="ad-banner" aria-label="مساحة إعلانية تجريبية">
+    <span class="ad-label">إعلان</span>
+
+    <div class="ad-content">
+        <h1>اقرأ لتتغير حياتك</h1>
+        <p>كل كتاب بداية جديدة</p>
+
+        <div class="ad-dots">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</section>
+
+<!-- التصنيفات -->
+<section class="categories" id="categories">
+
+    <button class="category active" data-category="الكل">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button class="category" data-category="دينية">
+        <span class="material-icons-round">mosque</span>
+        دينية
+    </button>
+
+    <button class="category" data-category="ثقافية">
+        <span class="material-icons-round">account_balance</span>
+        ثقافية
+    </button>
+
+    <button class="category" data-category="روايات وقصص">
+        <span class="material-icons-round">menu_book</span>
+        روايات وقصص
+    </button>
+
+    <button class="category" data-category="تعليمية">
+        <span class="material-icons-round">school</span>
+        تعليمية
+    </button>
+
+    <button class="category" data-category="تطوير الذات">
+        <span class="material-icons-round">trending_up</span>
+        تطوير الذات
+    </button>
+
+    <button class="category" data-category="علمية">
+        <span class="material-icons-round">science</span>
+        علمية
+    </button>
+
+    <button class="category" data-category="قانونية">
+        <span class="material-icons-round">balance</span>
+        قانونية
+    </button>
+
+    <button class="category" data-category="تقنية">
+        <span class="material-icons-round">memory</span>
+        تقنية
+    </button>
+
+</section>
+
+<main id="bookSections"></main>
+
+<!-- مزايا الموقع -->
+<section class="features">
+
+    <div class="feature">
+        <span class="material-icons-round">auto_stories</span>
+        <div>
+            <strong>مكتبة متنوعة</strong>
+            <small>كتب في مختلف المجالات</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">verified_user</span>
+        <div>
+            <strong>تجربة قراءة مريحة</strong>
+            <small>واجهة سهلة الاستخدام</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">devices</span>
+        <div>
+            <strong>متوافق مع الأجهزة</strong>
+            <small>هاتف وحاسوب ولوحي</small>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span class="material-icons-round">favorite</span>
+        <div>
+            <strong>اكتشف عالمًا جديدًا</strong>
+            <small>مع مكتبتي</small>
+        </div>
+    </div>
+
+</section>
+
+<!-- القائمة السفلية -->
+<nav class="bottom-nav">
+
+    <button class="nav-item active" data-page="home">
+        <span class="material-icons-round">home</span>
+        الرئيسية
+    </button>
+
+    <button class="nav-item" data-page="categories">
+        <span class="material-icons-round">grid_view</span>
+        الأقسام
+    </button>
+
+    <button class="nav-item" data-page="library">
+        <span class="material-icons-round">auto_stories</span>
+        مكتبتي
+    </button>
+
+    <button class="nav-item" data-page="notifications">
+        <span class="material-icons-round">notifications_none</span>
+        الإشعارات
+    </button>
+
+    <button class="nav-item" data-page="profile">
+        <span class="material-icons-round">person_outline</span>
+        الملف الشخصي
+    </button>
+
+</nav>
+
+<!-- تفاصيل الكتاب -->
+<div class="modal" id="bookModal">
+    <div class="modal-card">
+        <button class="close-btn" id="closeModal"
+                aria-label="إغلاق">
+            <span class="material-icons-round">close</span>
+        </button>
+
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<script>
+/*
+  بيانات تجريبية للعرض فقط.
+  يمكن لاحقًا استبدالها بقاعدة بيانات حقيقية.
+*/
+
+const books = [
+    {
+        title: "العادات الذرية",
+        author: "جيمس كلير",
+        category: "تطوير الذات",
+        rating: "4.4",
+        cover: "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg",
+        description: "كتاب عن بناء العادات الصغيرة وتحسين السلوك تدريجيًا."
+    },
+    {
+        title: "الأب الغني والأب الفقير",
+        author: "روبرت كيوساكي",
+        category: "تطوير الذات",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg",
+        description: "كتاب يناقش طريقة التفكير في المال والاستثمار."
+    },
+    {
+        title: "أربعون حديثًا",
+        author: "الإمام النووي",
+        category: "دينية",
+        rating: "4.7",
+        cover: "https://covers.openlibrary.org/b/isbn/9789960892711-L.jpg",
+        description: "مجموعة من الأحاديث النبوية التي تجمع أبوابًا مهمة من الدين."
+    },
+    {
+        title: "القرآن الكريم",
+        author: "كتاب الله",
+        category: "دينية",
+        rating: "4.9",
+        cover: "https://covers.openlibrary.org/b/isbn/9781590080252-L.jpg",
+        description: "القرآن الكريم، كتاب الهداية للمسلمين."
+    },
+    {
+        title: "صحيح البخاري",
+        author: "الإمام البخاري",
+        category: "دينية",
+        rating: "4.8",
+        cover: "https://covers.openlibrary.org/b/isbn/9789960892827-L.jpg",
+        description: "من أشهر كتب الحديث النبوي."
+    },
+    {
+        title: "مئة عام من العزلة",
+        author: "غابرييل غارسيا ماركيز",
+        category: "روايات وقصص",
+        rating: "4.5",
+        cover: "https://covers.openlibrary.org/b/isbn/9780060883287-L.jpg",
+        description: "رواية أدبية تدور حول أجيال من عائلة بوينديا."
+    },
+    {
+        title: "فن التفكير",
+        author: "كتاب في التفكير",
+        category: "ثقافية",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9780062219695-L.jpg",
+        description: "موضوعات عن التفكير والتحليل واتخاذ القرارات."
+    },
+    {
+        title: "تاريخ الحضارات",
+        author: "مؤلفون متنوعون",
+        category: "ثقافية",
+        rating: "4.2",
+        cover: "https://covers.openlibrary.org/b/isbn/9780140444312-L.jpg",
+        description: "نظرة عامة إلى تاريخ الحضارات الإنسانية."
+    },
+    {
+        title: "مقدمة في العلوم",
+        author: "مؤلفون متنوعون",
+        category: "علمية",
+        rating: "4.4",
+        cover: "https://covers.openlibrary.org/b/isbn/9780199216805-L.jpg",
+        description: "مدخل مبسط إلى عدد من المفاهيم العلمية."
+    },
+    {
+        title: "أساسيات التقنية",
+        author: "مؤلفون متنوعون",
+        category: "تقنية",
+        rating: "4.1",
+        cover: "https://covers.openlibrary.org/b/isbn/9780131103627-L.jpg",
+        description: "موضوعات تمهيدية في عالم التقنية والحوسبة."
+    },
+    {
+        title: "مبادئ القانون",
+        author: "مؤلفون متنوعون",
+        category: "قانونية",
+        rating: "4.2",
+        cover: "https://covers.openlibrary.org/b/isbn/9780198863155-L.jpg",
+        description: "مقدمة عامة إلى مفاهيم قانونية أساسية."
+    },
+    {
+        title: "تعلم اللغة",
+        author: "مؤلفون متنوعون",
+        category: "تعليمية",
+        rating: "4.3",
+        cover: "https://covers.openlibrary.org/b/isbn/9780194202411-L.jpg",
+        description: "موضوعات تعليمية تساعد على اكتساب المعرفة."
+    }
+];
+
+const sections = [
+    { title: "كتب شائعة", category: "الكل", icon: "local_fire_department" },
+    { title: "كتب دينية", category: "دينية", icon: "mosque" },
+    { title: "كتب ثقافية", category: "ثقافية", icon: "account_balance" },
+    { title: "روايات وقصص", category: "روايات وقصص", icon: "auto_stories" },
+    { title: "كتب تعليمية", category: "تعليمية", icon: "school" },
+    { title: "تطوير الذات", category: "تطوير الذات", icon: "trending_up" },
+    { title: "كتب علمية", category: "علمية", icon: "science" },
+    { title: "كتب قانونية", category: "قانونية", icon: "balance" },
+    { title: "كتب تقنية", category: "تقنية", icon: "memory" }
+];
+
+const sectionsContainer = document.getElementById("bookSections");
+const searchInput = document.getElementById("searchInput");
+const bookModal = document.getElementById("bookModal");
+const modalContent = document.getElementById("modalContent");
+
+let activeCategory = "الكل";
+let searchTerm = "";
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+function renderBooks() {
+    sectionsContainer.innerHTML = "";
+
+    const filteredBooks = books.filter(book => {
+        const matchesCategory =
+            activeCategory === "الكل" ||
+            book.category === activeCategory;
+
+        const query = searchTerm.trim().toLowerCase();
+
+        const matchesSearch =
+            !query ||
+            book.title.toLowerCase().includes(query) ||
+            book.author.toLowerCase().includes(query) ||
+            book.category.toLowerCase().includes(query);
+
+        return matchesCategory && matchesSearch;
+    });
+
+    sections.forEach(section => {
+        const sectionBooks = filteredBooks.filter(book =>
+            section.category === "الكل"
+                ? true
+                : book.category === section.category
+        );
+
+        if (!sectionBooks.length) return;
+
+        const sectionElement = document.createElement("section");
+        sectionElement.className = "section";
+
+        sectionElement.innerHTML = `
+            <div class="section-heading">
+                <h2 class="section-title">
+                    <span class="material-icons-round">
+                        ${escapeHTML(section.icon)}
+                    </span>
+                    ${escapeHTML(section.title)}
+                </h2>
+
+                <button class="see-all"
+                        data-show-category="${escapeHTML(section.category)}">
+                    ‹ عرض الكل
+                </button>
+            </div>
+
+            <div class="books-row">
+                ${sectionBooks.map(book => `
+                    <article class="book-card"
+                             tabindex="0"
+                             role="button"
+                             data-book="${escapeHTML(book.title)}"
+                             aria-label="عرض ${escapeHTML(book.title)}">
+
+                        <img class="book-cover"
+                             src="${escapeHTML(book.cover)}"
+                             alt="غلاف ${escapeHTML(book.title)}"
+                             loading="lazy"
+                             onerror="this.onerror=null;this.src='https://placehold.co/300x420/eaf4ff/0d3b66?text=Book';">
+
+                        <h3 class="book-title">
+                            ${escapeHTML(book.title)}
+                        </h3>
+
+                        <p class="book-author">
+                            ${escapeHTML(book.author)}
+                        </p>
+
+                        <span class="book-category">
+                            ${escapeHTML(book.category)}
+                        </span>
+
+                        <div class="book-rating">
+                            <span class="star">★</span>
+                            ${escapeHTML(book.rating)}
+                        </div>
+                    </article>
+                `).join("")}
+            </div>
+        `;
+
+        sectionsContainer.appendChild(sectionElement);
+    });
+
+    if (!sectionsContainer.children.length) {
+        sectionsContainer.innerHTML = `
+            <p style="text-align:center;padding:40px 15px">
+                لم نعثر على كتب تطابق بحثك.
+            </p>
+        `;
+    }
+}
+
+function openBook(title) {
+    const book = books.find(item => item.title === title);
+    if (!book) return;
+
+    modalContent.innerHTML = `
+        <h2>${escapeHTML(book.title)}</h2>
+
+        <img class="modal-cover"
+             src="${escapeHTML(book.cover)}"
+             alt="غلاف الكتاب"
+             onerror="this.onerror=null;this.src='https://placehold.co/300x420/eaf4ff/0d3b66?text=Book';">
+
+        <p><strong>المؤلف:</strong>
+           ${escapeHTML(book.author)}</p>
+
+        <p><strong>القسم:</strong>
+           ${escapeHTML(book.category)}</p>
+
+        <p>${escapeHTML(book.description)}</p>
+
+        <button class="action-btn" id="readButton">
+            قراءة الكتاب
+        </button>
+
+        <button class="action-btn secondary" id="downloadButton">
+            تحميل PDF
+        </button>
+
+        <button class="action-btn secondary" id="favoriteButton">
+            ♡ إضافة إلى مكتبتي
+        </button>
+
+        <p id="bookMessage" aria-live="polite"></p>
+    `;
+
+    bookModal.classList.add("show");
+
+    document.getElementById("readButton").onclick = () => {
+        document.getElementById("bookMessage").textContent =
+            "ستتوفر القراءة بعد ربط ملف الكتاب الحقيقي.";
+    };
+
+    document.getElementById("downloadButton").onclick = () => {
+        document.getElementById("bookMessage").textContent =
+            "ستتوفر خاصية التحميل بعد إضافة رابط PDF حقيقي.";
+    };
+
+    document.getElementById("favoriteButton").onclick = () => {
+        let favorites = JSON.parse(
+            localStorage.getItem("maktabatiFavorites") || "[]"
+        );
+
+        if (favorites.includes(book.title)) {
+            document.getElementById("bookMessage").textContent =
+                "الكتاب موجود بالفعل في مكتبتي.";
+            return;
+        }
+
+        favorites.push(book.title);
+
+        localStorage.setItem(
+            "maktabatiFavorites",
+            JSON.stringify(favorites)
+        );
+
+        document.getElementById("bookMessage").textContent =
+            "أُضيف الكتاب إلى مكتبتك على هذا الجهاز.";
+    };
+}
+
+/* فتح الكتب */
+
+sectionsContainer.addEventListener("click", event => {
+    const card = event.target.closest("[data-book]");
+    const showCategory = event.target.closest("[data-show-category]");
+
+    if (card) {
+        openBook(card.dataset.book);
+    }
+
+    if (showCategory) {
+        selectCategory(showCategory.dataset.showCategory);
+        document.getElementById("categories").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+});
+
+sectionsContainer.addEventListener("keydown", event => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    const card = event.target.closest("[data-book]");
+    if (card) {
+        event.preventDefault();
+        openBook(card.dataset.book);
+    }
+});
+
+/* البحث */
+
+searchInput.addEventListener("input", () => {
+    searchTerm = searchInput.value;
+    renderBooks();
+});
+
+/* اختيار التصنيف */
+
+function selectCategory(category) {
+    activeCategory = category;
+
+    document.querySelectorAll(".category").forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.category === category
+        );
+    });
+
+    renderBooks();
+}
+
+document.querySelectorAll(".category").forEach(button => {
+    button.addEventListener("click", () => {
+        selectCategory(button.dataset.category);
+    });
+});
+
+/* الوضع الليلي */
+
+document.getElementById("themeButton").addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    const dark = document.body.classList.contains("dark");
+
+    document.getElementById("themeButton").innerHTML =
+        `<span class="material-icons-round">${
+            dark ? "light_mode" : "dark_mode"
+        }</span>`;
+
+    localStorage.setItem("maktabatiDark", dark ? "1" : "0");
+});
+
+if (localStorage.getItem("maktabatiDark") === "1") {
+    document.body.classList.add("dark");
+
+    document.getElementById("themeButton").innerHTML =
+        '<span class="material-icons-round">light_mode</span>';
+}
+
+/* القائمة الجانبية */
+
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
+
+function closeDrawer() {
+    drawer.classList.remove("open");
+    overlay.classList.remove("show");
+}
+
+document.getElementById("menuButton").onclick = () => {
+    drawer.classList.add("open");
+    overlay.classList.add("show");
+};
+
+document.getElementById("closeDrawer").onclick = closeDrawer;
+overlay.onclick = closeDrawer;
+
+/* إغلاق نافذة الكتاب */
+
+document.getElementById("closeModal").onclick = () => {
+    bookModal.classList.remove("show");
+};
+
+bookModal.addEventListener("click", event => {
+    if (event.target === bookModal) {
+        bookModal.classList.remove("show");
+    }
+});
+
+/* المشاركة */
+
+document.getElementById("shareButton").onclick = async () => {
+    const shareData = {
+        title: "مكتبتي",
+        text: "اكتشف عالم الكتب مع مكتبتي",
+        url: location.href
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(location.href);
+            alert("تم نسخ رابط الصفحة.");
+        } else {
+            alert("بعد نشر الموقع، يمكنك مشاركة رابطه مع الآخرين.");
+        }
+    } catch (error) {
+        if (error.name !== "AbortError") {
+            alert("تعذرت المشاركة من هذا المتصفح.");
+        }
+    }
+};
+
+/* أزرار التنقل */
+
+function navigate(page) {
+    closeDrawer();
+
+    document.querySelectorAll(".nav-item").forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.page === page
+        );
+    });
+
+    if (page === "home") {
+        activeCategory = "الكل";
+        searchInput.value = "";
+        searchTerm = "";
+        selectCategory("الكل");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+    }
+
+    if (page === "categories") {
+        document.getElementById("categories").scrollIntoView({
+            behavior: "smooth"
+        });
+        return;
+    }
+
+    if (page === "library") {
+        const favorites = JSON.parse(
+            localStorage.getItem("maktabatiFavorites") || "[]"
+        );
+
+        alert(
+            favorites.length
+                ? "كتبك المحفوظة:\n" + favorites.join("\n")
+                : "لم تضف أي كتاب إلى مكتبتك بعد."
+        );
+        return;
+    }
+
+    if (page === "notifications") {
+        alert("لا توجد إشعارات جديدة.");
+        return;
+    }
+
+    if (page === "profile") {
+        alert("سيُضاف الملف الشخصي عند تطوير الموقع.");
+    }
+}
+
+document.querySelectorAll("[data-page]").forEach(button => {
+    button.addEventListener("click", () => {
+        navigate(button.dataset.page);
+    });
+});
+
+/* عرض الصفحة الرئيسية */
+
+renderBooks();
+</script>
+
+</body>
+</html>
